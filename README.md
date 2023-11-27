@@ -25,3 +25,35 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
+adopt a pet
+- search feature
+- auth feature
+- users can add animals 
+    - upload photos
+- users can mark an animal as adopted
+- users can mark favorites
+
+what kind of features
+    write them out like user stories
+
+        sally wants to login in to the app & look at adoptable animals
+        
+    once the user stories are created
+        decide whats going into a module
+        try to flesh out component structure (or build components first & then create module)
+        
+create the repo
+    ng new
+    push it up 
+German
+1. models first (what does our data look like)
+2. 
+* the biggest problem in groups is headbutts?
+* in the very beginning, think of models (user model, animal model), feature's are auth... & should be handled by only one dev
+  - dash board module
+  - account settings feature
+* come up with mvp
+  - then add fancy things like google maps, address
