@@ -50,7 +50,11 @@ create the repo
     push it up 
 German
 1. models first (what does our data look like)
-2. 
+2. accounts settings module
+3. auth module
+4. public model (landing page)
+5. frequently commiting our code
+
 * the biggest problem in groups is headbutts?
 * in the very beginning, think of models (user model, animal model), feature's are auth... & should be handled by only one dev
   - dash board module
