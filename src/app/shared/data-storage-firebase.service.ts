@@ -1,27 +1,27 @@
-// import { HttpClient } from "@angular/common/http";
-// import { Injectable } from "@angular/core";
-// import { ExerciseService } from "../exercise-list/exercise.service";
-// import { Exercise } from "./exercisemodel";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { PetService } from "../pet-module/pet.service";
+import { petModel } from "../pet-module/petmodel";
 
 
-// @Injectable({providedIn: 'root'})
-// export class DataStorageService {
+@Injectable({providedIn: 'root'})
+export class DataStorageFirebase {
 
-//   constructor(private http: HttpClient,){}
+  constructor(private http: HttpClient, private petService: PetService){}
 
-// storeExercises() {
-//   const myExercises = this.petService.getExercises();
-//   this.http.put(
-//     'https://exercise-project-49ee5-default-rtdb.firebaseio.com/exercises.json', myExercises)
-//   .subscribe(response => {
-//     console.log(response);
-//   })
-// }
-// fetchExercises(){
-//   this.http.get<Exercise[]>(
-//     'https://exercise-project-49ee5-default-rtdb.firebaseio.com/exercises.json')
-//   .subscribe(myExercises => {
-//     this.exerciseService.setExercises(myExercises);
-//   })
-// }
-// }
+storePets() {
+  const petList = this.petService.getPets();
+  this.http.put(
+    'https://petadoption-9abd7-default-rtdb.firebaseio.com/pets.json', petList)
+  .subscribe(response => {
+    console.log(response);
+  })
+}
+fetchPets(){
+  this.http.get<petModel[]>(
+    'https://petadoption-9abd7-default-rtdb.firebaseio.com/pets.json')
+  .subscribe(petList => {
+    this.petService.setPetList(petList);
+  })
+}
+}
