@@ -19,8 +19,10 @@ export class PetService {
   ]
   constructor() { }
  //function to return petData array of pets
-  getPets(index: number) {
-    return this.petData[index];
+
+  getPets() {
+
+    return this.petData
   }
   //function to create a new pet
   addPet(pet: petModel) {
@@ -35,6 +37,12 @@ export class PetService {
     alert(
       'Your pet has been succesfully removed!!!!'
     );
+  }
+
+  //function to set pets
+  setPetList(petData: petModel[]){
+    this.petData = petData;
+    this.petListChange.next(this.petData.slice());
   }
   //function to edit a pet?
 
