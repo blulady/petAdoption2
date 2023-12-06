@@ -5,6 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './auth/auth.module';
+import { PetModuleModule } from './pet-module/pet-module.module';
+import { HomeComponent } from './home/home/home.component';
+import { HomeModule } from './home/home.module';
+
+
+
 
 @NgModule({
   declarations: [
@@ -15,6 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    AuthModule,
+    // PetModuleModule,
+    // HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
