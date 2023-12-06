@@ -5,10 +5,18 @@ import { PetModuleModule } from './pet-module/pet-module.module';
 import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: "full"},
-  {path: 'home', component: HomeModule},
-  {path: 'auth', component: AuthModule},
-  {path: 'pet', component: PetModuleModule}
+  {path: 'home',
+  loadChildren: () => import('./home/home.module').then(
+    m => m.HomeModule
+  )},
+  {path: 'pet',
+  loadChildren: () => import('./pet-module/pet-module.module').then(
+    m => m.PetModuleModule
+  )},
+  {path: 'auth',
+  loadChildren: () => import('./auth/auth.module').then(
+    m => m.AuthModule
+  )}
 ];
 
 @NgModule({

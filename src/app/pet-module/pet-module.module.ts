@@ -6,6 +6,7 @@ import { PetListingComponent } from './pet-listing/pet-listing.component';
 import { PetDetailsComponent } from './pet-details/pet-details.component';
 
 
+
 @NgModule({
   declarations: [
     PetListingComponent,
@@ -13,7 +14,8 @@ import { PetDetailsComponent } from './pet-details/pet-details.component';
   ],
   imports: [
     CommonModule,
-    PetModuleRoutingModule
-  ]
+    PetModuleRoutingModule,
+  ],
+
 })
 export class PetModuleModule { }
