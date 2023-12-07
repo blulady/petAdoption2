@@ -13,7 +13,7 @@ const routes: Routes = [
   loadChildren: () => import('./pet-module/pet-module.module').then(
     m => m.PetModuleModule
   )},
-  {path: 'auth',
+  {path: 'login',
   loadChildren: () => import('./auth/auth.module').then(
     m => m.AuthModule
   )}
