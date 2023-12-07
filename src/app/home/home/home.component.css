@@ -1,0 +1,11 @@
+.button-container {
+  display: flex;
+  width: 100%;
+}
+
+.col-6 {
+  flex: 0 0 50%; /* Ensures each column takes up 50% width */
+  max-width: 100%; /* Limits the maximum width to 50% */
+  max-height: 100%;
+  box-sizing: border-box; /* Includes padding and border within the defined width */
+}

@@ -18,6 +18,7 @@ export class PetService {
     // new petModel('Nolan', 'Is a genius dog', 'dog', 126, 4, 'https://thevillagevets.com/wp-content/uploads/2022/10/most-intelligent-dog-breeds-atlanta-ga.jpg' ),
     // new petModel('Twinkles', 'Is a large hairless cat', 'cat', 127, 5, 'https://justintadlock.com/user/media/2023/07/twinkle-cat-bed.webp' ),
   ]
+
   constructor() { }
  //function to return petData array of pets
 

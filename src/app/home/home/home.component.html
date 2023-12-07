@@ -1,2 +1,19 @@
-<p>home works!</p>
 <router-outlet></router-outlet>
+
+<div class="row" *ngIf="showButtons"> <!-- Hide buttons if showButtons is false -->
+  <div class="col-6">
+    <button class="btn btn-primary btn-lg btn-block" (click)="showCats()">Click for Cats</button>
+  </div>
+  <div class="col-6">
+    <button class="btn btn-danger btn-lg btn-block" (click)="showDogs()">Click for Dogs</button>
+  </div>
+</div>
+
+<div class="row mt-4" *ngIf="!showButtons && animalsToShow.length > 0"> <!-- Display animal information if showButtons is false -->
+  <div class="col-12">
+    <div *ngFor="let animal of animalsToShow">
+      <!-- Display specific animal information here -->
+      <p>Name: {{animal.name}}, Species: {{animal.species}}</p><img src="{{animal.img}}" style="max-height: 250px; max-width: 250px;">
+    </div>
+  </div>
+</div>
