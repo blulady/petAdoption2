@@ -45,6 +45,7 @@ export class PetService {
   setPetList(petData: petModel[]){
     this.petData = petData;
     this.petListChange.next(this.petData.slice());
+
   }
   //function to edit a pet?
 
