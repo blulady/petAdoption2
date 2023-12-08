@@ -16,18 +16,25 @@
 
 <div class="row mt-4" *ngIf="!showButtons && animalsToShow.length > 0">
   <div class="col-12">
-    <div *ngFor="let animal of animalsToShow">
-      <p>Name: {{ animal.name }}, Species: {{ animal.species }}</p><img src="{{ animal.img }}" style="max-height: 250px; max-width: 250px;" />
+    <div class="pet-list" *ngFor="let animal of animalsToShow" (click)="goToDetail(animal.id)">
+      <div class="pet-info">
+        <p class="pet-name">Name: {{ animal.name }}</p>
+        <p class="pet-species">Species: {{ animal.species }}</p>
+      </div>
+      <img [src]="animal.photo" alt="{{ animal.name }} Image" class="pet-image" />
     </div>
   </div>
 </div>
 <h1 class="page-title">Add potentially geometrical data stating these are near you?</h1>
 <div class="pet-grid">
-  <div class="pet-card" *ngFor="let pet of petData">
+  <div class="pet-card" *ngFor="let pet of petData" (click)="goToDetail(pet.id)">
     <h1>{{ pet.name }}</h1>
     <img [src]="pet.photo" alt="{{ pet.name }} Image" style="max-height: 150px; max-width: 150px;" />
     <h3>{{ pet.species }}</h3>
     <p>{{ pet.description }}</p>
     <!-- Add other details you want to display -->
   </div>
-</div>
+
+    <!-- Add other details you want to display -->
+  </div>
+
