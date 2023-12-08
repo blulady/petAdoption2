@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PetService } from 'src/app/pet-module/pet.service';
+import { petModel } from 'src/app/pet-module/petmodel';
+import { DataStorageFirebase } from 'src/app/shared/data-storage-firebase.service';
+
 const catData = [
   { name: 'Tabby', description: 'A crazy feline', species: 'cat', img: 'https://i.pinimg.com/736x/b0/3c/be/b03cbeaded6326b85d1edb86c91caa59.jpg' },
   { name: 'Twinkels', description: 'is a large hairless cat', species: 'cat',  img: 'https://justintadlock.com/user/media/2023/07/twinkle-cat-bed.webp' },
@@ -26,11 +29,20 @@ const dogData = [
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  constructor(private petService: PetService){}
+export class HomeComponent implements OnInit{
+
+
+
+  constructor(private data: DataStorageFirebase, private petService: PetService){}
   animalsToShow: any[] = []; // Initialized as empty array
   showButtons: boolean = true;
+  petData: petModel[] = [];
 
+  ngOnInit(): void{
+    this.data.fetchPets();
+    this.petService.petListChange.subscribe((pets: petModel[]) => {
+      this.petData = pets;
+    })}
   // Function to display cats
   showCats() {
 
@@ -45,3 +57,6 @@ export class HomeComponent {
     this.showButtons = false; // Hide buttons
   }
 }
+
+
+
