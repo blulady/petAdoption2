@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PetService } from 'src/app/pet-module/pet.service';
 import { petModel } from 'src/app/pet-module/petmodel';
 import { DataStorageFirebase } from 'src/app/shared/data-storage-firebase.service';
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit{
 
 
 
-  constructor(private data: DataStorageFirebase, private petService: PetService){}
+  constructor(private data: DataStorageFirebase, private petService: PetService, private router: Router){}
   animalsToShow: any[] = []; // Initialized as empty array
   showButtons: boolean = true;
   petData: petModel[] = [];
@@ -44,17 +45,19 @@ export class HomeComponent implements OnInit{
       this.petData = pets;
     })}
   // Function to display cats
+  // Function to filter and display cats
   showCats() {
-
-    this.animalsToShow = catData;
-
+    this.animalsToShow = this.petData.filter(pet => pet.species === 'cat');
     this.showButtons = false; // Hide buttons
   }
 
-  // Function to display dogs
+  // Function to filter and display dogs
   showDogs() {
-    this.animalsToShow = dogData;
+    this.animalsToShow = this.petData.filter(pet => pet.species === 'dog');
     this.showButtons = false; // Hide buttons
+  }
+  goToDetail(id: number) {
+    this.router.navigate(['/pet', id]);
   }
 }
 
