@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
+  isLoginMode = true;
+  onCreateAccount() {
+    this.isLoginMode = false;
+  }
+  onLogin (form: NgForm) {
+    this.isLoginMode = true;
+    form.reset();
+  }
+
+onSubmit(form: NgForm) {
+  console.log(form.value)
+}
 
 }
+
