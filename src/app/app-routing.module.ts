@@ -18,7 +18,8 @@ const routes: Routes = [
   loadChildren: () => import('./auth/auth.module').then(
     m => m.AuthModule
   )},
-  { path: 'pet/:id', component: PetDetailsComponent } //added to path to pet/ :id -garrett
+  { path: 'pet/:id', component: PetDetailsComponent }, //added to path to pet/ :id -garrett
+
 ];
 
 @NgModule({
