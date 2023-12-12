@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError, Subject, BehaviorSubject } from 'rxjs';
+import { User } from './auth/user.model';
 
 
 
@@ -14,23 +15,55 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
+  user = new BehaviorSubject<User | null>(null);
+  // here the BehaviorSubject is subscriptable after the user has been emitted, meaning that this.authService.user.pipe(take(1), exhaustMap(user => {
+ //  return this.http.get<PetList[]>()
+  //  } )) could be used infront of fetchPets to authenticate the user https://pro.academind.com/courses/765847/lectures/13906586
 
   constructor(private http: HttpClient) { }
 
-  signup(email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
+  signup2(email: string, password: string) {
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBc9kvok9Dp7Lp0gXBEGVaK_zpgEqLN2Fg',
     {email:email, password: password, returnSecureToken: true })
-    // .pipe(catchError(errorRes => {
-    //   let errorMessage = 'An unknown error occured.';
-    //   if (!errorRes.error || !errorRes.error.error) {
-    //     return throwError(errorMessage);
-    //   }
-    //   errorMessage = errorRes.error.error.message;
-    //   return errorMessage}));
+  .pipe(catchError(this.handleError), tap(resData => {
+    this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+  }))
   }
 
-  login (email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+
+  login2 (email: string, password: string) {
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBc9kvok9Dp7Lp0gXBEGVaK_zpgEqLN2Fg',
     {email: email, password: password, returnSecureToken: true})
+    .pipe(catchError(this.handleError), tap(resData => {
+      this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+    }))
+  }
+
+  logout () {
+    this.user.next(null);
+  }
+
+  private handleError(errorRes: HttpErrorResponse) {
+    let errorMessage = 'An unkonwn error occurred!'
+    if (!errorRes.error || !errorRes.error.error) {
+      return throwError(errorMessage);
+    }
+    switch (errorRes.error.error.message) {
+      case 'EMAIL_EXISTS':
+        errorMessage = 'This email exists already.';
+        break;
+      case 'EMAIL_NOT_FOUND':
+        errorMessage = "User was not found."
+        break;
+      case "INVALID_PASSWORD":
+        errorMessage = 'This password is not correct'
+    }
+    return throwError(errorMessage);
+  }
+
+  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+    {const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+      const user = new User(email, userId, token, expirationDate);
+      this.user.next(user);}
   }
 }

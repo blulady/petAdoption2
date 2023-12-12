@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {NgForm } from '@angular/forms';
 import { AuthResponseData, AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-auth',
@@ -9,42 +11,45 @@ import { Observable } from 'rxjs';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
-  isLoginMode = false;
+  isLoginMode = true;
   success_message: string | null = null;
   error: string | null = null;
-  constructor(private authService: AuthService) {}
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   onCreateAccount() {
     this.isLoginMode = false;
   }
   onLogin (form: NgForm) {
-    this.isLoginMode = false;
+    this.isLoginMode = true;
     form.reset();
   }
 
-onSubmit(form: NgForm) {
+
+
+onSubmit2(form: NgForm) {
   if (!form.valid) {
-    return;}
+    return;
+  }
   const email = form.value.email;
   const password = form.value.password;
-
   let authObs: Observable<AuthResponseData>;
 
   if (this.isLoginMode) {
-    authObs = this.authService.login(email, password);
+    authObs = this.authService.login2(email, password)
   } else {
-    authObs = this.authService.signup(email, password);}
+    authObs = this.authService.signup2(email, password)
+  }
+  authObs.subscribe(
+    resData => {console.log(resData);
+    this.router.navigate(['/home']);},
+    errorMessage => {console.log(errorMessage);
+                    this.error = errorMessage;});
 
-    authObs.subscribe(resData => {console.log(resData);},
-    errorRes => {console.log(errorRes);
-    this.error = errorRes.error.error.message;})
-    if (!this.error) {
-      this.success_message = "Account Successfully Created."
-    }
-    console.log(this.error)
-    console.log(this.success_message);
-    form.reset()
-    }
+  form.reset()
+
+  }
+
 
 
 }
