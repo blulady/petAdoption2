@@ -23,11 +23,7 @@ export class NavbarComponent implements OnInit{
   toggleFavorites(): void {
     this.showFavorites = !this.showFavorites;
   }
-  resetHomeView(): void {
-    if (this.homeComponent) {
-      this.homeComponent.resetView();
-    }
-  }
+
   fetchFavorites(): void {
     this.data.fetchFavPets();
     // Subscribe to updates in the favorites list

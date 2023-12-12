@@ -54,11 +54,7 @@ export class HomeComponent implements OnInit{
     this.animalsToShow = this.petService.getPets().filter(pet => pet.species === 'dog');
     this.showButtons = false;
   }
-  resetView(): void {
-    this.showButtons = true;
-    this.ngOnInit(); // Call ngOnInit logic again
-    this.animalsToShow = []; // Clear the animalsToShow array
-  }
+
 
   }
 

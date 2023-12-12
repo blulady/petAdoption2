@@ -20,7 +20,7 @@ const routes: Routes = [
     m => m.AuthModule
   )},
   { path: 'pet/:id', component: PetDetailsComponent }, //added to path to pet/ :id -garrett
-  { path: 'favorites', component: FavoritesComponent }
+  { path: 'myfavorites', component: FavoritesComponent }
 ];
 
 @NgModule({
