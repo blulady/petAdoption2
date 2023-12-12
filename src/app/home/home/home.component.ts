@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { PetService } from 'src/app/pet-module/pet.service';
 import { FavoritePetModel, PetModel } from 'src/app/pet-module/petmodel';
 import { DataStorageFirebase } from 'src/app/shared/data-storage-firebase.service';
@@ -15,7 +16,19 @@ export class HomeComponent implements OnInit{
   showButtons: boolean = true;
   petData: PetModel[] = [];
 
-  constructor(private data: DataStorageFirebase, private petService: PetService, private router: Router) { }
+  constructor(private data: DataStorageFirebase, private petService: PetService, private router: Router)  {
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+      )
+      .subscribe((event: NavigationEnd) => {
+        if (event.url === '/home') {
+          this.showButtons = true;
+        } else {
+          this.showButtons = true;
+        }
+      });
+  }
 
 
 
@@ -54,7 +67,10 @@ export class HomeComponent implements OnInit{
     this.animalsToShow = this.petService.getPets().filter(pet => pet.species === 'dog');
     this.showButtons = false;
   }
-
+  navigateToHome(): void {
+    this.showButtons = true; // Set showButtons to true when navigating to home
+    this.router.navigate(['/home']); // Navigate to the home page route
+  }
 
   }
 
