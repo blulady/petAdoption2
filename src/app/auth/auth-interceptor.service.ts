@@ -9,18 +9,19 @@ import { AuthService } from "./auth.service";
 // https://pro.academind.com/courses/765847/lectures/13906588
 
 @Injectable()
-export class AuthInterceptorService {
-  constructor(private authService: AuthService) {}}
+export class AuthInterceptorService implements HttpInterceptor {
+  constructor(private authService: AuthService) {}
 
-//   intercept(req: HttpRequest<any>, next: HttpHandler) {
-//     this.authService.user.pipe(take(1),
-//     exhaustMap(user => {
-//       if (!user) {
-//         return next.handle(req);
-//       }
-//       const modifiedreq = req.clone({params: new HttpParams().set('auth', user?.token)});
-//       return next.handle(modifiedreq);
-//     }))
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // return this.authService.user.pipe(take(1),
+    return this.authService.user.pipe(take(1),
+    exhaustMap(user => {
+      if (!user) {
+        return next.handle(req);
+      }
+      const modifiedreq = req.clone({params: new HttpParams().set('auth', user?.token)});
+      return next.handle(modifiedreq);
+    }))
 
-//   }
-// }
+  }
+}
