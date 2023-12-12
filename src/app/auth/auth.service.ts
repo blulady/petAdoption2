@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
 import { User } from './auth/user.model';
+import { environment } from '../environments/environment';
 
 
 
@@ -23,7 +24,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signup2(email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBc9kvok9Dp7Lp0gXBEGVaK_zpgEqLN2Fg',
+    return this.http.post<AuthResponseData>(environment.FB_API_URL_SIGN_UP + environment.FB_API_KEY,
     {email:email, password: password, returnSecureToken: true })
   .pipe(catchError(this.handleError), tap(resData => {
     this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
@@ -32,7 +33,7 @@ export class AuthService {
 
 
   login2 (email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBc9kvok9Dp7Lp0gXBEGVaK_zpgEqLN2Fg',
+    return this.http.post<AuthResponseData>(environment.FB_API_URL_LOGIN+ environment.FB_API_KEY,
     {email: email, password: password, returnSecureToken: true})
     .pipe(catchError(this.handleError), tap(resData => {
       this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
