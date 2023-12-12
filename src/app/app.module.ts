@@ -7,22 +7,22 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { PetModuleModule } from './pet-module/pet-module.module';
-import { HomeComponent } from './home/home/home.component';
 import { HomeModule } from './home/home.module';
-
+import { CommonModule } from '@angular/common';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     AuthModule,
+    CommonModule
     // PetModuleModule,
     // HomeModule
   ],

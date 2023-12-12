@@ -46,7 +46,7 @@
   width: calc(100% - 20px);
   margin-top: 10px;
   padding: 10px;
-  background-color: #e65550;
+  background-color: purple;
   color: white;
   border: none;
   border-radius: 8px;
@@ -58,4 +58,33 @@
 
 .pet-card .custom-button:hover {
   transform: scale(1.05);
+}
+/* styles.css or pet-card.component.css */
+.pet-card {
+  position: relative;
+  /* Other styles for the card */
+}
+
+.card-header {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1; /* Ensure it's above other content */
+  transition: transform 0.3s ease, color 0.3s ease; /* Transition effect */
+}
+
+.card-header i {
+  font-size: 24px;
+  color: black; /* Initial color */
+  cursor: pointer;
+}
+
+.card-header i:hover {
+  transform: scale(1.2); /* Scale effect on hover */
+  color: red; /* Color change on hover */
+}
+
+/* Style when the pet is marked as favorite */
+.is-favorite {
+  color: red !important; /* Override color */
 }

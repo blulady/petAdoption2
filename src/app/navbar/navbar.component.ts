@@ -1,40 +1,37 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataStorageFirebase } from '../shared/data-storage-firebase.service';
-import { AuthService } from '../auth/auth.service';
-import { Subscription } from 'rxjs'
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HomeComponent } from '../home/home/home.component';
+import { PetService } from '../pet-module/pet.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent  implements OnInit, OnDestroy {
-  constructor(private data: DataStorageFirebase,
-              private authService: AuthService,
-              private router: Router){}
-  isAuthenticated = false;
-  private userSub!: Subscription;
+export class NavbarComponent implements OnInit {
+  @ViewChild(HomeComponent) homeComponent!: HomeComponent; // Reference to HomeComponent
+  constructor(
+    private data: DataStorageFirebase,
+    private router: Router,
+    private petService: PetService
+  ) {}
+
+  favoritesList: any[] = []; // Initialize as an empty array
+  showFavorites: boolean = false;
 
   ngOnInit(): void {
-     this.userSub = this.authService.user.subscribe( user => {
-      this.isAuthenticated = !!user;
-
-     }
-     );
-  }
-  getData(){
-    this.data.storePets();
+   // Fetch favorites when the component initializes
+    this.data.fetchFavPets();
   }
 
-  onLogout(){
-    this.authService.logout();
-    this.router.navigate(['/login'])
-
+  toggleFavorites(): void {
+    this.showFavorites = !this.showFavorites;
   }
 
-  ngOnDestroy(): void {
-    this.userSub.unsubscribe();
-}
-
-
+  reloadHomePage(): void {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/home']);
+    });
+  }
 }
