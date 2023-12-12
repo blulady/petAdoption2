@@ -1,8 +1,8 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataStorageFirebase } from '../shared/data-storage-firebase.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { HomeComponent } from '../home/home/home.component';
-import { PetService } from '../pet-module/pet.service';
-
+import { AuthService } from '../auth/auth.service';
+import { Subscription } from 'rxjs'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -30,5 +30,33 @@ export class NavbarComponent implements OnInit{
     this.petService.petFavListChange.subscribe((favorites: any[]) => {
       this.favoritesList = favorites;
     });
+export class NavbarComponent  implements OnInit, OnDestroy {
+  constructor(private data: DataStorageFirebase,
+              private authService: AuthService,
+              private router: Router){}
+  isAuthenticated = false;
+  private userSub!: Subscription;
+
+  ngOnInit(): void {
+     this.userSub = this.authService.user.subscribe( user => {
+      this.isAuthenticated = !!user;
+
+     }
+     );
   }
+  getData(){
+    this.data.storePets();
+  }
+
+  onLogout(){
+    this.authService.logout();
+    this.router.navigate(['/login'])
+
+  }
+
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
+}
+
+
 }
