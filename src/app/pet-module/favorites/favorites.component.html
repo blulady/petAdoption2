@@ -1,14 +1,17 @@
-<h1>My Favorites</h1>
+<!-- favorites-list.component.html -->
 
-<div *ngIf="myFavorites.length === 0">
+<h1 class="favorites-title">My Favorites</h1>
+
+<div *ngIf="myFavorites.length === 0" class="no-favorites">
   <p>No favorites found.</p>
 </div>
 
-<div *ngFor="let favorite of myFavorites">
+<div *ngFor="let favorite of myFavorites" class="favorite-item" (click)="goToDetail(favorite.id)">
   <!-- Display favorite details here -->
-  <div>
-    <h2>{{ favorite.name }}</h2>
-    <img [src]="favorite.photo" alt="Favorite Photo" style="height: 270px; width: 457px;">
+  <div class="favorite-details">
+    <h2 class="favorite-name">{{ favorite.name }}</h2>
+    <img [src]="favorite.photo" alt="Favorite Photo" class="favorite-photo">
     <!-- Add other favorite details -->
   </div>
 </div>
+
