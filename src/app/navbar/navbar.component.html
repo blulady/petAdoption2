@@ -13,10 +13,7 @@
           <a routerLink="/myfavorites" routerLinkActive="active" class="nav-link">My Favorites</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/login" *ngIf="!isAuthenticated">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" href="#" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a>
+          <a class="nav-link" routerLinkActive="active" href="#">Login</a>
         </li>
       </ul>
     </div>
