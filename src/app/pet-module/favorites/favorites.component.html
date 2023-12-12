@@ -1,0 +1,14 @@
+<h1>My Favorites</h1>
+
+<div *ngIf="myFavorites.length === 0">
+  <p>No favorites found.</p>
+</div>
+
+<div *ngFor="let favorite of myFavorites">
+  <!-- Display favorite details here -->
+  <div>
+    <h2>{{ favorite.name }}</h2>
+    <img [src]="favorite.photo" alt="Favorite Photo" style="height: 270px; width: 457px;">
+    <!-- Add other favorite details -->
+  </div>
+</div>
