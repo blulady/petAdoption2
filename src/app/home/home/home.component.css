@@ -1,3 +1,4 @@
+/* Your existing styles */
 .image-container {
   position: relative;
   overflow: hidden; /* Ensure the shadow won't overflow */
@@ -41,7 +42,6 @@
   transform: scale(1.05); /* Scale the button on hover */
 }
 
-
 /* Styles for pet listing with Petfinder.com colors and centered content */
 .page-title {
   text-align: center;
@@ -84,8 +84,16 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.pet-card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Ensure full height of the card body */
+}
+
 .pet-card button {
-  width: calc(100% - 20px);
+  width: 70%; /* Adjust width as desired */
   margin-top: 10px;
   padding: 10px;
   background-color: #e65550;
@@ -96,13 +104,13 @@
   font-weight: bold;
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
-  position: relative;
 }
 
 .pet-card button:hover {
   transform: scale(1.05);
 }
 
+/* Other styles... */
 /* css for specifically the clicked on species */
 /* Add this CSS to your styles.css or relevant CSS file */
 .pet-list {
@@ -143,6 +151,7 @@
 .pet-image:hover {
   transform: scale(1.05);
 }
+
 /* styles.css or pet-card.component.css */
 .pet-card {
   position: relative;
@@ -172,4 +181,3 @@
 .is-favorite {
   color: red !important; /* Override color */
 }
-
