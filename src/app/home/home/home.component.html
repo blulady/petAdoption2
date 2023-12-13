@@ -25,16 +25,29 @@
     </div>
   </div>
 </div>
-<h1 class="page-title">Add potentially geometrical data stating these are near you?</h1>
+<!-- home.component.html -->
+<br>
+<h1 class="page-title"></h1>
+<!-- home.component.html -->
 <div class="pet-grid">
-  <div class="pet-card" *ngFor="let pet of petData" (click)="goToDetail(pet.id)">
-    <h1>{{ pet.name }}</h1>
-    <img [src]="pet.photo" alt="{{ pet.name }} Image" style="max-height: 150px; max-width: 150px;" />
-    <h3>{{ pet.species }}</h3>
-    <p>{{ pet.description }}</p>
-    <!-- Add other details you want to display -->
+  <div class="pet-card" *ngFor="let pet of animalsToShow" (click)="goToDetail(pet.id)">
+    <div class="card-header">
+      <i class="fas fa-heart"
+         [ngClass]="{ 'is-favorite': isFavorite(pet) }"
+         (click)="toggleFavorite(pet); $event.stopPropagation();"
+      ></i>
+    </div>
+    <div class="card-body">
+      <!-- Other pet details -->
+      <h1>{{ pet.name }}</h1>
+      <img [src]="pet.photo" alt="{{ pet.name }} Image" style="max-height: 150px; max-width: 150px;" />
+      <h3>{{ pet.species }}</h3>
+      <button class="custom-button">Adopt Now</button>
+    </div>
   </div>
+</div>
 
-    <!-- Add other details you want to display -->
-  </div>
+
+
+
 

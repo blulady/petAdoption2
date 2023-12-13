@@ -1,54 +1,21 @@
-<!-- HTML structure -->
 <div class="background-container">
   <div class="page-title">Available Pets</div>
 
   <div class="pet-grid">
     <div class="pet-card" *ngFor="let pet of petData" (click)="goToDetail(pet.id)">
-      <h2 class="pet-name">{{ pet.name }}</h2>
-      <img [src]="pet.photo" alt="{{ pet.name }} Image" class="pet-image" />
-      <h3 class="pet-species">{{ pet.species }}</h3>
-      <!-- Add other details you want to display -->
-      <button class="custom-button">Adopt Now</button>
+      <div class="card-header">
+        <i class="fas fa-heart"
+          [ngClass]="{ 'is-favorite': isFavorite(pet) }"
+          (click)="toggleFavorite(pet); $event.stopPropagation();"
+        ></i>
+      </div>
+      <div class="card-body">
+        <h2 class="pet-name">{{ pet.name }}</h2>
+        <img [src]="pet.photo" alt="{{ pet.name }} Image" class="pet-image" />
+        <h3 class="pet-species">{{ pet.species }}</h3>
+        <!-- Add other details you want to display -->
+        <button class="custom-button">Adopt Now</button>
+      </div>
     </div>
   </div>
 </div>
-<div class="background-container">
-  <div class="page-title">Available Pets</div>
-
-  <div class="pet-grid">
-    <div class="pet-card" *ngFor="let pet of petData" (click)="goToDetail(pet.id)">
-      <h2 class="pet-name">{{ pet.name }}</h2>
-      <img [src]="pet.photo" alt="{{ pet.name }} Image" class="pet-image" />
-      <h3 class="pet-species">{{ pet.species }}</h3>
-      <!-- Add other details you want to display -->
-      <button class="custom-button">Adopt Now</button>
-    </div>
-  </div>
-</div>
-<div class="background-container">
-  <div class="page-title">Available Pets</div>
-
-  <div class="pet-grid">
-    <div class="pet-card" *ngFor="let pet of petData" (click)="goToDetail(pet.id)">
-      <h2 class="pet-name">{{ pet.name }}</h2>
-      <img [src]="pet.photo" alt="{{ pet.name }} Image" class="pet-image" />
-      <h3 class="pet-species">{{ pet.species }}</h3>
-      <!-- Add other details you want to display -->
-      <button class="custom-button">Adopt Now</button>
-    </div>
-  </div>
-</div>
-<div class="background-container">
-  <div class="page-title">Available Pets</div>
-
-  <div class="pet-grid">
-    <div class="pet-card" *ngFor="let pet of petData" (click)="goToDetail(pet.id)">
-      <h2 class="pet-name">{{ pet.name }}</h2>
-      <img [src]="pet.photo" alt="{{ pet.name }} Image" class="pet-image" />
-      <h3 class="pet-species">{{ pet.species }}</h3>
-      <!-- Add other details you want to display -->
-      <button class="custom-button">Adopt Now</button>
-    </div>
-  </div>
-</div>
-
