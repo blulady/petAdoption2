@@ -5,9 +5,6 @@
       <div class="alert alert-danger" *ngIf="error">
         <p> {{ error }} </p>
       </div>
-      <div class="alert alert-success" *ngIf="success_message">
-        <p> {{ success_message }} </p>
-      </div>
       <form #authform="ngForm" (ngSubmit)="onSubmit2(authform)">
         <div class="form-group">
           <label for="email">Email</label>
@@ -23,7 +20,7 @@
             <label for="button">New to Pet Adoptions?</label>
           </div>
           <div>
-            <button class="btn btn-primary">Create Account</button>
+            <button class="btn btn-primary" routerLink="/signup">Create Account</button>
           </div>
         </div>
       </form>

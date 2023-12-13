@@ -5,13 +5,15 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './auth-interceptor.service';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 
 
 @NgModule({
   declarations: [
-    AuthComponent
+    AuthComponent,
+    RegistrationComponent
   ],
   imports: [
     CommonModule,
