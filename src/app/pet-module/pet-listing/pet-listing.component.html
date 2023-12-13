@@ -1,21 +1,72 @@
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item">
+    <i class="fas fa-heart"></i> Favorite - Click to toggle favorite status
+  </div>
+  <div class="legend-item">
+    <i class="fas fa-pencil-alt"></i> Edit - Click to edit pet details
+  </div>
+  <div class="legend-item">
+    <i class="fas fa-minus-circle"></i> Remove - Click to delete a pet
+  </div>
+  <div class="legend-item">
+    <i class="fas fa-plus"></i> Add New Pet - Click to add a new pet
+  </div>
+</div>
+
+<div class="add-pet-button-container">
+  <!-- Button to show the form for adding a new pet -->
+  <button class="add-pet-button" (click)="showAddPetForm()">
+    <i class="fas fa-plus"></i> <!-- Plus sign icon -->
+  </button>
+</div>
+
+<!-- New Pet Form (initially hidden) -->
+<div *ngIf="showForm" class="new-pet-form">
+  <form #newPetForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Add form fields here -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="newPet.name" required>
+
+    <label for="species">Species:</label>
+    <input type="text" id="species" name="species" [(ngModel)]="newPet.species" required>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" [(ngModel)]="newPet.description" required></textarea>
+
+    <label for="photo">Photo URL:</label>
+    <input type="text" id="photo" name="photo" [(ngModel)]="newPet.photo" required>
+
+    <button type="submit">Add Pet</button>
+  </form>
+</div>
+
+<!-- Background container -->
 <div class="background-container">
+  <!-- Page title -->
   <div class="page-title">Available Pets</div>
 
+  <!-- Pet cards grid -->
   <div class="pet-grid">
+    <!-- Pet card -->
     <div class="pet-card" *ngFor="let pet of petData" (click)="goToDetail(pet.id)">
       <div class="card-header">
-        <i class="fas fa-heart"
-          [ngClass]="{ 'is-favorite': isFavorite(pet) }"
-          (click)="toggleFavorite(pet); $event.stopPropagation();"
-        ></i>
+        <!-- Heart icon for favorite -->
+        <i class="fas fa-heart" [ngClass]="{ 'is-favorite': isFavorite(pet) }" (click)="toggleFavorite(pet); $event.stopPropagation();"></i>
+        <!-- Edit button -->
+        <button class="edit-button" (click)="editPet(pet.id)">
+          <i class="fas fa-pencil-alt"></i>
+        </button>
       </div>
-      <div class="card-body">
+      <!-- Pet details -->
+      <div class="card-body" title="Click for more details">
         <h2 class="pet-name">{{ pet.name }}</h2>
         <img [src]="pet.photo" alt="{{ pet.name }} Image" class="pet-image" />
         <h3 class="pet-species">{{ pet.species }}</h3>
-        <!-- Add other details you want to display -->
-        <button class="custom-button">Adopt Now</button>
+        <!-- Add other details here -->
       </div>
+      <!-- Delete icon -->
+      <i class="fas fa-minus-circle remove-icon" (click)="deletePet(pet)"></i>
     </div>
   </div>
 </div>

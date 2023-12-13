@@ -35,13 +35,14 @@ export class PetService {
    this.petListChange.next([...this.petData]); // Emit a new copy of the petData array
 }
  //function to delete a pet
- deleteItem(index: number): void {
-  if (index >= 0 && index < this.petData.length) {
+ deletePet(pet: PetModel): void {
+  const index = this.petData.findIndex(p => p.id === pet.id);
+  if (index !== -1) {
     this.petData.splice(index, 1);
-    this.petListChange.next([...this.petData]); // Emit a new copy of the petData array
-      alert('Your pet has been successfully removed!!!!');
-    }
+    this.petListChange.next([...this.petData]);
+    alert('Your pet has been successfully removed!');
   }
+}
 
    // Function to set pets
    setPetList(petData: PetModel[]): void {
