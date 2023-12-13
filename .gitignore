@@ -46,3 +46,5 @@ src/environments/environment.ts
 environment.prod.ts
 environment.ts
 
+src/app/environments/environment.prod.ts
+src/app/home/home/home.component.html
