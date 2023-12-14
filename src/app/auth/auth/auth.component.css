@@ -1,0 +1,51 @@
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url('https://www.akc.org/wp-content/uploads/2019/10/staffordshire-terrier-with-orange-kitten-playful-in-grass.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.login-container {
+  width: 400px;
+  padding: 20px;
+  background-color: #ffc90e;
+  border-radius: 5px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
