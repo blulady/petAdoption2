@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataStorageFirebase } from 'src/app/shared/data-storage-firebase.service';
 import { PetService } from '../pet.service';
+import { PetfinderApiService } from '../petfinder-api.service';
 import { PetModel } from '../petmodel';
 import { Router } from '@angular/router';
 
@@ -15,19 +16,43 @@ export class PetListingComponent {
   newPet: Partial<PetModel> = {}; // Partial type for the new pet object
   formValid: boolean = true; // Flag to track form validation
 
-  constructor(private data: DataStorageFirebase, private petService: PetService, private router: Router) {}
+  constructor(
+    private data: DataStorageFirebase,
+    private petService: PetService,
+    private petfinderApiService: PetfinderApiService,
+    private router: Router) {}
 
-  ngOnInit(): void {
-    this.data.fetchPets();
-    this.petService.petListChange.subscribe((pets: PetModel[]) => {
-      this.petData = pets;
-    });
-  }
+ngOnInit(): void{
+  this.data.fetchPets();
+  this.getPetList();
+  this.petService.petListChange.subscribe((pets: PetModel[]) => {
+    this.petData = pets;
+  })
+}
 
-  goToDetail(id: number): void {
-    this.router.navigate(['/pet', id]);
-  }
+goToDetail(id: number) {
+  this.router.navigate(['/pet', id]);
+}
 
+getToken() {
+  return new Promise<void>((resolve, reject) => {
+    this.petfinderApiService.getOAuthToken();
+    resolve();
+  })
+}
+
+getPetList() {
+  this.petfinderApiService.getListOfPets();
+  this.petService.setPetList(this.petfinderApiService.petList);
+  this.petService.petListChange.next(this.petService.petData.slice());
+  console.log(this.petService.petData.slice());
+}
+
+
+isFavorite(pet: PetModel): boolean {
+  // Implement logic to check if the pet is in favorites
+  return this.petService.getFavorites().some(fav => fav.id === pet.id);
+}
   isFavorite(pet: PetModel): boolean {
     return this.petService.getFavorites().some(fav => fav.id === pet.id);
   }
