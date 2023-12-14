@@ -41,6 +41,7 @@ export class PetListingComponent {
   }
 
   deletePet(pet: PetModel): void {
+    event.stopPropagation(); 
     if (confirm('Are you sure you want to remove this listing, and not see it again?')) {
       this.petService.deletePet(pet);
     }
