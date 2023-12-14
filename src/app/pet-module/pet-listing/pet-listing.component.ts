@@ -41,7 +41,7 @@ export class PetListingComponent {
   }
 
   deletePet(pet: PetModel): void {
-    event.stopPropagation(); 
+    event.stopPropagation();
     if (confirm('Are you sure you want to remove this listing, and not see it again?')) {
       this.petService.deletePet(pet);
     }
@@ -94,5 +94,17 @@ export class PetListingComponent {
   // Function to clear the form fields
   clearForm(): void {
     this.newPet = {}; // Clear the newPet object
+  }
+  editPet(petId: number): void {
+    event.stopPropagation(); // Stop event propagation
+    // Find the selected pet by its ID
+    const selectedPet = this.petData.find(pet => pet.id === petId);
+
+    // Check if the selected pet exists
+    if (selectedPet) {
+      // Populate the form fields with the selected pet's information
+      this.newPet = { ...selectedPet }; // Copy the selected pet's data to newPet
+      this.showForm = true; // Activate the form
+    }
   }
 }
