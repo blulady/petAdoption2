@@ -2,7 +2,7 @@ export interface PetModel {
   name: string;
   species: string;
   description: string;
-  postcode: number;
+  postcode?: number;
   id: number;
   photo: string;
 }
