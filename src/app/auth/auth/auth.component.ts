@@ -16,25 +16,16 @@ export class AuthComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin (form: NgForm) {
-    this.isLoginMode = true;
-    form.reset();
-  }
 
-
-  onSubmit2(form: NgForm) {
+  onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
     }
     const email = form.value.email;
     const password = form.value.password;
     let authObs: Observable<AuthResponseData>;
+    authObs = this.authService.login2(email, password)
 
-    if (this.isLoginMode) {
-      authObs = this.authService.login2(email, password)
-    } else {
-      authObs = this.authService.signup2(email, password)
-    }
     authObs.subscribe(
       resData => {console.log(resData);
       this.router.navigate(['/home']);},
