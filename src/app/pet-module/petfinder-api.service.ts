@@ -93,7 +93,8 @@ export class PetfinderApiService {
             // console.log(this.singlePet);
             const foundPet = resData.animal;
             console.log(foundPet)
-            return foundPet;
+            this.petService.setOnePet(foundPet);
+            // return foundPet;
         })
     }
 }

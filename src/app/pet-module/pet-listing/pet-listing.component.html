@@ -62,7 +62,7 @@
       <div class="card-body" title="Click for more details">
         <h2 class="pet-name">{{ pet.name }}</h2>
         <img *ngIf="pet.photos[0]"
-          [src]="pet.photos[0].small"
+          [src]="pet.photos[0].large"
           alt="{{ pet.name }} Image"
           class="pet-image" />
         <img *ngIf="!pet.photos[0]"

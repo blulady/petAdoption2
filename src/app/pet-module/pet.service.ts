@@ -13,6 +13,7 @@ export class PetService {
   petFavListChange = new Subject<FavoritePetModel[]>();
   petFavorites: FavoritePetModel[] = [];
 
+  onePet: PetModel;
 
   public petData: PetModel[] = [
     //now is populating below information via firebase api
@@ -48,6 +49,11 @@ export class PetService {
    setPetList(petData: PetModel[]): void {
     this.petData = [...petData]; // Set the petData array with a new copy of the provided array
     this.petListChange.next([...this.petData]); // Emit a new copy of the petData array
+  }
+
+  setOnePet(pet: PetModel) {
+    this.onePet = pet;
+    this.petSelected.next(pet);
   }
   // Functions related to favorites below here
   setFavoritePets(favoritePets: FavoritePetModel[]): void {

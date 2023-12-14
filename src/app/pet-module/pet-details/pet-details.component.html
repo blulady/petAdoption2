@@ -1,1 +1,46 @@
-<p>pet-details works!</p>
+<div class="details-container">
+    <div class="main-info-container">
+        <div>
+            <h2>{{ pet.name }}</h2>
+            <p>{{ pet.breeds.primary }}</p>
+            <p>{{ pet.colors.primary }}</p>
+            <p>{{ pet.age }}</p>
+            <p>{{ pet.size }}</p>
+            <p>{{ pet.status }}</p>
+            <p>Contact: {{ pet.contact.email }}</p>
+        </div>
+
+        <img *ngIf="pet.photos[0]"
+            [src]="pet.photos[0].large"
+            alt="{{ pet.name }} Image"
+            class="pet-image" />
+        <img *ngIf="!pet.photos[0]"
+            src="https://www.brasscraft.com/wp-content/uploads/2017/01/no-image-available.png"
+            class="pet-image" />
+
+    </div>
+    <div class="additional-details">
+        <div class="attribute-list">
+            <p *ngIf="pet.attributes.spayed_neutered">Spayed/Neutered</p>
+            <p *ngIf="pet.attributes.house_trained">House trained</p>
+            <p *ngIf="pet.attributes.declawed">Declawed</p>
+            <p *ngIf="pet.attributes.special_needs">Special needs</p>
+            <p *ngIf="pet.attributes.shots_current">Shots current</p>
+            <div *ngIf="pet.environment.children">
+                <p>Good with children.</p>
+            </div>
+        </div>
+        <div class="description">
+            <p>{{ pet.description }}</p>
+        </div>
+    </div>
+    <div>
+        <div *ngIf="pet.tags" class="tags-list">
+            <div *ngFor="let tag of pet.tags">
+                <p>{{ tag }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+

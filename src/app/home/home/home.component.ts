@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { PetService } from 'src/app/pet-module/pet.service';
+import { PetfinderApiService } from 'src/app/pet-module/petfinder-api.service';
 import { FavoritePetModel, PetModel } from 'src/app/pet-module/petmodel';
 import { DataStorageFirebase } from 'src/app/shared/data-storage-firebase.service';
 
@@ -17,7 +18,11 @@ export class HomeComponent implements OnInit{
   showButtons: boolean = true;
   petData: PetModel[] = [];
 
-  constructor(private data: DataStorageFirebase, private petService: PetService, private router: Router)  {
+  constructor(
+    private data: DataStorageFirebase,
+    private petService: PetService,
+    private petfinderApiService: PetfinderApiService,
+    private router: Router)  {
     this.router.events
       .pipe(
         filter((event): event is NavigationEnd => event instanceof NavigationEnd)
@@ -32,7 +37,8 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(): void{
-    this.data.fetchPets();
+    // this.data.fetchPets();
+    this.petfinderApiService.getListOfPets();
     this.petService.petListChange.subscribe((pets: PetModel[]) => {
       this.animalsToShow = pets;
     });
