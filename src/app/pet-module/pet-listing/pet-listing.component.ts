@@ -53,9 +53,6 @@ isFavorite(pet: PetModel): boolean {
   // Implement logic to check if the pet is in favorites
   return this.petService.getFavorites().some(fav => fav.id === pet.id);
 }
-  isFavorite(pet: PetModel): boolean {
-    return this.petService.getFavorites().some(fav => fav.id === pet.id);
-  }
 
   toggleFavorite(pet: PetModel): void {
     if (this.isFavorite(pet)) {
