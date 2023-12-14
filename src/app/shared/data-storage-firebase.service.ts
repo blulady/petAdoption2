@@ -37,4 +37,8 @@ fetchPets(){
       this.petService.setFavoritePets(favPetList);
     });
 }
+updatePet(updatedPet: PetModel): Observable<any> {
+  const url = `${this.firebaseUrl}/pets/${updatedPet.id}.json`; // Endpoint URL for updating a specific pet
+  return this.http.put(url, updatedPet);
+}
 }
