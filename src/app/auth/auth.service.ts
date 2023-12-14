@@ -17,9 +17,6 @@ export interface AuthResponseData {
 })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
-  // here the BehaviorSubject is subscriptable after the user has been emitted, meaning that this.authService.user.pipe(take(1), exhaustMap(user => {
- //  return this.http.get<PetList[]>()
-  //  } )) could be used infront of fetchPets to authenticate the user https://pro.academind.com/courses/765847/lectures/13906586
 
   constructor(private http: HttpClient) { }
 
