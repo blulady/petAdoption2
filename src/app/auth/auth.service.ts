@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
 import { User } from './auth/user.model';
-import { environment } from '../../environments/environment';
+import { environment } from '../environments/environment.prod';
 
 
 

@@ -11,7 +11,13 @@
       </div>
       <div class="card-body">
         <h2 class="pet-name">{{ pet.name }}</h2>
-        <img [src]="pet.photo" alt="{{ pet.name }} Image" class="pet-image" />
+        <img *ngIf="pet.photos[0]"
+          [src]="pet.photos[0].small"
+          alt="{{ pet.name }} Image"
+          class="pet-image" />
+        <img *ngIf="!pet.photos[0]"
+          src="https://www.brasscraft.com/wp-content/uploads/2017/01/no-image-available.png"
+          class="pet-image" />
         <h3 class="pet-species">{{ pet.species }}</h3>
         <!-- Add other details you want to display -->
         <button class="custom-button">Adopt Now</button>
