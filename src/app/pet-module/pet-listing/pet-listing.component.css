@@ -1,19 +1,21 @@
-
+/* Styles for the page title */
 .page-title {
   font-size: 24px;
-  color: #fff; /* Text color for the title */
-  padding: 20px 0; /* Add padding for better appearance */
+  color: #fff;
+  padding: 20px 0;
   margin: 0;
 }
 
+/* Pet cards grid */
 .pet-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  padding: 10px; /* Add padding to the pet grid */
+  padding: 10px;
 }
 
+/* Styling for each pet card */
 .pet-card {
   width: 200px;
   margin: 10px;
@@ -27,8 +29,10 @@
   align-items: center;
   text-align: center;
   padding: 10px;
+  position: relative;
 }
 
+/* Styling for pet images */
 .pet-card img.pet-image {
   width: 100%;
   height: 150px;
@@ -36,17 +40,19 @@
   border-bottom-right-radius: 15px;
 }
 
+/* Hover effect on pet card */
 .pet-card:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease-in-out; /* Adding transition for box-shadow */
+  transition: box-shadow 0.3s ease-in-out;
 }
 
+/* Styling for custom buttons */
 .pet-card .custom-button {
   width: calc(100% - 20px);
   margin-top: 10px;
   padding: 10px;
-  background-color: #e65550;
+  background-color: purple;
   color: white;
   border: none;
   border-radius: 8px;
@@ -58,4 +64,188 @@
 
 .pet-card .custom-button:hover {
   transform: scale(1.05);
+}
+
+/* Styling for card header */
+.card-header {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.card-header i {
+  font-size: 24px;
+  color: black;
+  cursor: pointer;
+}
+
+.card-header i:hover {
+  transform: scale(1.2);
+  color: red;
+}
+
+/* Styling for favorite icon */
+.is-favorite {
+  color: red !important;
+}
+
+/* Styling for delete icon */
+.remove-icon {
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  color: black; /* Default color of the delete button */
+  transition: color 0.3s ease; /* Smooth transition effect */
+}
+
+.remove-icon:hover {
+  color: red; /* Color to change to when hovered */
+}
+
+/* Background container styles */
+.background-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Add Pet button container */
+.add-pet-button-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Styling for Add Pet button */
+.add-pet-button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-pet-button:hover {
+  background-color: darkgreen;
+}
+
+.add-pet-button i {
+  margin-top: 3px;
+}
+
+/* Styling for form labels */
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333; /* Label text color */
+}
+
+/* Styling for text inputs */
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff; /* Highlight border color on focus */
+}
+
+/* Styling for submit button */
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker color on hover */
+}
+
+/* Edit button styles */
+.pet-card {
+  position: relative;
+}
+
+/* Edit button styles */
+.edit-button {
+  position: absolute;
+  top: 3px; /* Adjust as needed */
+  right: 145px; /* Adjust as needed */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  /* Other styles for the edit button */
+}
+
+.edit-button:hover {
+  transform: scale(1.1); /* Increase size on hover if desired */
+}
+
+/* CSS for the legend */
+.legend {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.legend-item {
+  margin: 0 10px; /* Add spacing between legend items */
+}
+/* New Pet Form */
+.new-pet-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.new-pet-form form {
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px; /* Adjust max-width as needed */
+}
+
+.new-pet-form label,
+.new-pet-form input,
+.new-pet-form textarea {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.new-pet-form button[type="submit"] {
+  width: 100%;
+  max-width: 200px; /* Adjust max-width as needed */
 }

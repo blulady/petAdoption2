@@ -9,6 +9,8 @@ import { AuthModule } from './auth/auth.module';
 import { PetModuleModule } from './pet-module/pet-module.module';
 import { HomeComponent } from './home/home/home.component';
 import { HomeModule } from './home/home.module';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -23,6 +25,8 @@ import { HomeModule } from './home/home.module';
     AppRoutingModule,
     HttpClientModule,
     AuthModule,
+    CommonModule,
+    FormsModule
     // PetModuleModule,
     // HomeModule
   ],
