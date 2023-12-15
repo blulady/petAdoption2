@@ -13,7 +13,7 @@
     <i class="fas fa-plus"></i> Add New Pet - Click to add a new pet
   </div>
 </div>
-
+<br>
 <div class="add-pet-button-container">
   <!-- Button to show the form for adding a new pet -->
   <button class="add-pet-button" (click)="showAddPetForm()">
@@ -41,35 +41,37 @@
   </form>
 </div>
 
+
 <!-- Background container -->
 <div class="background-container">
   <!-- Page title -->
   <div class="page-title">Available Pets</div>
 
- <!-- Pet cards grid -->
-<div class="pet-grid">
-  <!-- Pet card -->
-  <ng-container *ngFor="let pet of petData">
-    <div *ngIf="pet.photos && pet.photos[0]" class="pet-card" (click)="goToDetail(pet.id)">
-      <div class="card-header">
-        <!-- Heart icon for favorite -->
-        <i class="fas fa-heart" [ngClass]="{ 'is-favorite': isFavorite(pet) }" (click)="toggleFavorite(pet); $event.stopPropagation();"></i>
-        <!-- Edit button -->
-        <button class="edit-button" (click)="editPet(pet.id)">
-          <i class="fas fa-pencil-alt"></i>
-        </button>
+  <!-- Pet cards grid -->
+  <div class="pet-grid">
+    <!-- Pet card -->
+    <ng-container *ngFor="let pet of petData; let i = index">
+      <div *ngIf="pet.photos && pet.photos.length > 0" class="pet-card" (click)="goToDetail(pet.id)">
+        <div class="card-header">
+          <!-- Heart icon for favorite -->
+          <i class="fas fa-heart" [ngClass]="{ 'is-favorite': isFavorite(pet) }" (click)="toggleFavorite(pet); $event.stopPropagation();"></i>
+          <!-- Edit button -->
+          <button class="edit-button" (click)="editPet(pet.id)">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+        </div>
+        <!-- Pet details -->
+        <div class="card-body" title="Click for more details">
+          <h2 class="pet-name">{{ pet.name | slice:0:9 }}</h2> <!-- Limiting name to 9 characters -->
+          <img [src]="pet.photos[0].large" [alt]="pet.name + ' Image'" class="pet-image" />
+          <h3 class="pet-species">{{ pet.species }}</h3>
+          <!-- Add other details here -->
+        </div>
+        <button class="custom-button" (click)="adoptNow()">Adopt Now</button>
+        <!-- Delete icon -->
+        <i class="fas fa-minus-circle remove-icon" (click)="deletePet(pet)"></i>
       </div>
-      <!-- Pet details -->
-      <div class="card-body" title="Click for more details">
-        <h2 class="pet-name">{{ pet.name | slice:0:9 }}</h2> <!-- Limiting name to 9 characters -->
-        <img [src]="pet.photos[0].large" [alt]="pet.name + ' Image'" class="pet-image" />
-        <h3 class="pet-species">{{ pet.species }}</h3>
-        <!-- Add other details here -->
-      </div>
-      <button class="custom-button" (click)="adoptNow()">Adopt Now</button>
-
-      <!-- Delete icon -->
-      <i class="fas fa-minus-circle remove-icon" (click)="deletePet(pet)"></i>
-    </div>
-  </ng-container>
+    </ng-container>
+    <!-- Placeholder for empty cards -->
+  </div>
 </div>

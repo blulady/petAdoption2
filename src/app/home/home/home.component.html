@@ -17,9 +17,9 @@
 <div class="row mt-4" *ngIf="!showButtons && animalsToShow.length > 0">
   <div class="col-12">
     <div class="pet-list" *ngFor="let animal of animalsToShow" (click)="goToDetail(animal.id)">
-      <div class="pet-info">
-        <!-- Display only the first word of the animal's name -->
-        <p class="pet-name">{{ animal.name | slice: 0:9 }}</p> <!-- Limiting name to 10 characters -->
+      <div class="pet-info" *ngIf="animal.photos && animal.photos.length > 0">
+        <!-- Display only if the animal has a photo -->
+        <p class="pet-name">{{ animal.name | slice: 0:9 }}</p> <!-- Limiting name to 9 characters -->
         <p class="pet-species">Species: {{ animal.species }}</p>
       </div>
       <!-- Display image only if the animal has a photo -->
@@ -34,12 +34,12 @@
 
 
 
-<!-- home.component.html -->
+
 <br>
 <h1 class="page-title"></h1>
-<!-- home.component.html -->
+
 <div class="pet-grid">
-  <ng-container *ngFor="let pet of animalsToShow">
+  <ng-container *ngFor="let pet of getLimitedAnimalsToShow()">
     <div *ngIf="pet.photos && pet.photos.length > 0" class="pet-card" (click)="goToDetail(pet.id)">
       <div class="card-header">
         <i class="fas fa-heart"
@@ -54,12 +54,10 @@
         <img *ngIf="pet.photos[0]"
           [src]="pet.photos[0].large"
           alt="{{ pet.name }} Image"
-          class="pet-image"
-          style="max-height: 150px; max-width: 150px;" />
+          class="pet-image" />
         <h3>{{ pet.species }}</h3>
-        <button class="custom-button">Adopt Now</button>
+        
       </div>
     </div>
   </ng-container>
 </div>
-

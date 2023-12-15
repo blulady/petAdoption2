@@ -12,7 +12,7 @@ import { DataStorageFirebase } from 'src/app/shared/data-storage-firebase.servic
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  animalsToShow: PetModel[] = [];
+  animalsToShow: any[] = [];
   showButtons: boolean = true;
 
   constructor(
@@ -72,4 +72,8 @@ export class HomeComponent implements OnInit {
     this.showButtons = true;
     this.router.navigate(['/home']);
   }
+    // Method to limit the number of cards to 5
+    getLimitedAnimalsToShow(): any[] {
+      return this.animalsToShow.slice(0, 5);
+    }
 }
