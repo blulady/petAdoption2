@@ -20,39 +20,37 @@ export class PetListingComponent {
     private data: DataStorageFirebase,
     private petService: PetService,
     private petfinderApiService: PetfinderApiService,
-    private router: Router) {}
+    private router: Router
+  ) {}
 
-ngOnInit(): void{
-  // this.data.fetchPets();
-  this.getPetList();
-  this.petService.petListChange.subscribe((pets: PetModel[]) => {
-    this.petData = pets;
-  })
-}
+  ngOnInit(): void {
+    this.getPetList();
+    this.petService.petListChange.subscribe((pets: PetModel[]) => {
+      this.petData = pets;
+    });
+  }
 
-goToDetail(id: number) {
-  this.router.navigate(['/pet', id]);
-}
+  goToDetail(id: number) {
+    this.router.navigate(['/pet', id]);
+  }
 
-getToken() {
-  return new Promise<void>((resolve, reject) => {
-    this.petfinderApiService.getOAuthToken();
-    resolve();
-  })
-}
+  getToken() {
+    return new Promise<void>((resolve, reject) => {
+      this.petfinderApiService.getOAuthToken();
+      resolve();
+    });
+  }
 
-getPetList() {
-  this.petfinderApiService.getListOfPets();
-  this.petService.setPetList(this.petfinderApiService.petList);
-  this.petService.petListChange.next(this.petService.petData.slice());
-  console.log(this.petService.petData.slice());
-}
+  getPetList() {
+    this.petfinderApiService.getListOfPets();
+    this.petService.setPetList(this.petfinderApiService.petList);
+    this.petService.petListChange.next(this.petService.petData.slice());
+    console.log(this.petService.petData.slice());
+  }
 
-
-isFavorite(pet: PetModel): boolean {
-  // Implement logic to check if the pet is in favorites
-  return this.petService.getFavorites().some(fav => fav.id === pet.id);
-}
+  isFavorite(pet: PetModel): boolean {
+    return this.petService.getFavorites().some(fav => fav.id === pet.id);
+  }
 
   toggleFavorite(pet: PetModel): void {
     if (this.isFavorite(pet)) {
@@ -71,14 +69,15 @@ isFavorite(pet: PetModel): boolean {
 
   showAddPetForm(): void {
     this.showForm = !this.showForm; // Toggle form visibility
+    if (!this.showForm) {
+      this.clearForm(); // Clear form fields if form is hidden
+    }
   }
 
-  // Function to generate a unique ID for the new pet
   generateUniqueId(): number {
     return Math.floor(Math.random() * 10000); // Replace this with your unique ID generation logic
   }
 
-  // Function to handle form submission
   onSubmit(): void {
     this.checkFormValidity(); // Check form validity before submission
     if (this.formValid) {
@@ -90,43 +89,34 @@ isFavorite(pet: PetModel): boolean {
         photo: this.newPet.photo!,
       };
 
-      // Store the new pet in Firebase
       this.data.storePet(newPet).subscribe(response => {
         console.log('New pet stored in Firebase:', response);
-        // Add the new pet to the local data after storing in Firebase
         this.petData.push(newPet);
-        // Clear the form and hide it after submission
         this.clearForm();
         this.showForm = false;
       });
     } else {
-      // Display a message to the user to fill out all fields
       alert('Please fill out all fields.');
     }
   }
 
-  // Function to check form validity
   checkFormValidity(): void {
-    this.formValid = true; // Reset form validity flag
+    this.formValid = true;
     if (!this.newPet.name || !this.newPet.species || !this.newPet.description || !this.newPet.photo) {
-      this.formValid = false; // Set form validity flag to false
+      this.formValid = false;
     }
   }
 
-  // Function to clear the form fields
   clearForm(): void {
-    this.newPet = {}; // Clear the newPet object
+    this.newPet = {};
   }
-  editPet(petId: number): void {
-    event.stopPropagation(); // Stop event propagation
-    // Find the selected pet by its ID
-    const selectedPet = this.petData.find(pet => pet.id === petId);
 
-    // Check if the selected pet exists
+  editPet(petId: number): void {
+    event.stopPropagation();
+    const selectedPet = this.petData.find(pet => pet.id === petId);
     if (selectedPet) {
-      // Populate the form fields with the selected pet's information
-      this.newPet = { ...selectedPet }; // Copy the selected pet's data to newPet
-      this.showForm = true; // Activate the form
+      this.newPet = { ...selectedPet };
+      this.showForm = true;
     }
   }
 }

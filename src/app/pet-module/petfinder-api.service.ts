@@ -42,7 +42,6 @@ export class PetfinderApiService {
                     tokenArray.push(val);
                 }
                 this.token = tokenArray[2];
-                console.log(this.token);
                 return this.token;
             })
         )
@@ -58,7 +57,7 @@ export class PetfinderApiService {
                     tokenArray.push(val);
                 }
                 this.token = tokenArray[2];
-                console.log(this.token);
+
                 return this.token;
             }),
             mergeMap(token => this.http.get(this.petfinderURL,
@@ -68,10 +67,10 @@ export class PetfinderApiService {
         ).subscribe((resData:any) => {
             this.petService.setPetList(resData.animals);
             // this.petService.petListChange.next(this.petService.petData);
-            console.log(this.petService.petData);
+
         })
     }
-   
+
     getPetById(id: number) {
         this.http.post(this.petfinderOAuthURL, this.tokenRequestBody)
         .pipe(
@@ -81,7 +80,7 @@ export class PetfinderApiService {
                     tokenArray.push(val);
                 }
                 this.token = tokenArray[2];
-                console.log(this.token);
+
                 return this.token;
             }),
             mergeMap(token => this.http.get(`${this.petfinderURL}${id}`,
@@ -92,9 +91,26 @@ export class PetfinderApiService {
             // this.singlePet = resData.animal;
             // console.log(this.singlePet);
             const foundPet = resData.animal;
-            console.log(foundPet)
             this.petService.setOnePet(foundPet);
             // return foundPet;
         })
+    }
+    getListOfPetsByType(type: string) {
+      return this.http.post(this.petfinderOAuthURL, this.tokenRequestBody).pipe(
+        map((responseData) => {
+          let tokenArray = [];
+          for (let val of Object.values(responseData)) {
+            tokenArray.push(val);
+          }
+          this.token = tokenArray[2];
+
+          return this.token;
+        }),
+        mergeMap((token) =>
+          this.http.get(`${this.petfinderURL}?type=${type}`, {
+            headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
+          })
+        )
+      );
     }
 }

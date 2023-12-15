@@ -10,14 +10,14 @@ export class DataStorageFirebase {
   private firebaseUrl = 'https://petadoption-9abd7-default-rtdb.firebaseio.com';
   constructor(private http: HttpClient, private petService: PetService){}
 
-storePets() {
-  const petList = this.petService.getPets();
-  this.http.put(
-    'https://petadoption-9abd7-default-rtdb.firebaseio.com/pets.json', petList
-    ).subscribe(response => {
-      console.log('Pets stored on Firebase:', response);
-    });
-}
+// storePets() {
+//   const petList = this.petService.getPets();
+//   this.http.put(
+//     'https://petadoption-9abd7-default-rtdb.firebaseio.com/pets.json', petList
+//     ).subscribe(response => {
+//       console.log('Pets stored on Firebase:', response);
+//     });
+// }
   // Method to store a single pet in Firebase
   storePet(newPet: PetModel): Observable<any> {
     const url = `${this.firebaseUrl}/pets.json`; // Adjust the endpoint URL as needed
