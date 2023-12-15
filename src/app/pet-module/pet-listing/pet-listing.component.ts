@@ -23,7 +23,7 @@ export class PetListingComponent {
     private router: Router) {}
 
 ngOnInit(): void{
-  this.data.fetchPets();
+  // this.data.fetchPets();
   this.getPetList();
   this.petService.petListChange.subscribe((pets: PetModel[]) => {
     this.petData = pets;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { PetModel } from '../petmodel';
+import { PetService } from '../pet.service';
 import { PetfinderApiService } from '../petfinder-api.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class PetDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private petService: PetService,
     private petfinderApiService: PetfinderApiService) {}
 
   ngOnInit() {
@@ -23,6 +25,10 @@ export class PetDetailsComponent implements OnInit {
       // Fetch the detailed information of the pet using this.petId
       // Assign the retrieved data to this.pet
       this.pet = this.petfinderApiService.getPetById(petIdfromParams);
+      this.petService.petSelected.subscribe((pet: PetModel) => {
+        this.pet = pet;
+      })
+      console.log(this.pet);
     });
   }
 }
