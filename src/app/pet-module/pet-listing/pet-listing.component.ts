@@ -54,7 +54,6 @@ isFavorite(pet: PetModel): boolean {
   return this.petService.getFavorites().some(fav => fav.id === pet.id);
 }
 
-
   toggleFavorite(pet: PetModel): void {
     if (this.isFavorite(pet)) {
       this.petService.removeFromFavorites(pet);
