@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { map, mergeMap } from 'rxjs';
+import { map, mergeMap, partition } from 'rxjs';
 import { PetModel } from './petmodel';
 import { PetService } from './pet.service';
 
