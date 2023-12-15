@@ -46,10 +46,11 @@
   <!-- Page title -->
   <div class="page-title">Available Pets</div>
 
-  <!-- Pet cards grid -->
-  <div class="pet-grid">
-    <!-- Pet card -->
-    <div class="pet-card" *ngFor="let pet of petData" (click)="goToDetail(pet.id)">
+ <!-- Pet cards grid -->
+<div class="pet-grid">
+  <!-- Pet card -->
+  <ng-container *ngFor="let pet of petData">
+    <div *ngIf="pet.photos && pet.photos[0]" class="pet-card" (click)="goToDetail(pet.id)">
       <div class="card-header">
         <!-- Heart icon for favorite -->
         <i class="fas fa-heart" [ngClass]="{ 'is-favorite': isFavorite(pet) }" (click)="toggleFavorite(pet); $event.stopPropagation();"></i>
@@ -60,19 +61,15 @@
       </div>
       <!-- Pet details -->
       <div class="card-body" title="Click for more details">
-        <h2 class="pet-name">{{ pet.name }}</h2>
-        <img *ngIf="pet.photos[0]"
-          [src]="pet.photos[0].large"
-          alt="{{ pet.name }} Image"
-          class="pet-image" />
-        <img *ngIf="!pet.photos[0]"
-          src="https://www.brasscraft.com/wp-content/uploads/2017/01/no-image-available.png"
-          class="pet-image" />
+        <h2 class="pet-name">{{ pet.name | slice:0:9 }}</h2> <!-- Limiting name to 9 characters -->
+        <img [src]="pet.photos[0].large" [alt]="pet.name + ' Image'" class="pet-image" />
         <h3 class="pet-species">{{ pet.species }}</h3>
         <!-- Add other details here -->
       </div>
+      <button class="custom-button" (click)="adoptNow()">Adopt Now</button>
+
       <!-- Delete icon -->
       <i class="fas fa-minus-circle remove-icon" (click)="deletePet(pet)"></i>
     </div>
-  </div>
+  </ng-container>
 </div>
