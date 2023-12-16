@@ -2,37 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { PetService } from 'src/app/pet-module/pet.service';
+import { PetfinderApiService } from 'src/app/pet-module/petfinder-api.service';
 import { FavoritePetModel, PetModel } from 'src/app/pet-module/petmodel';
 import { DataStorageFirebase } from 'src/app/shared/data-storage-firebase.service';
-
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
-
-  animalsToShow: any[] = []; // Initialized as empty array
+export class HomeComponent implements OnInit {
+  animalsToShow: any[] = [];
   showButtons: boolean = true;
-  petData: PetModel[] = [];
 
-  constructor(private data: DataStorageFirebase, private petService: PetService, private router: Router)  {
+  constructor(
+    private data: DataStorageFirebase,
+    private petService: PetService,
+    private petfinderApiService: PetfinderApiService,
+    private router: Router
+  ) {
     this.router.events
       .pipe(
         filter((event): event is NavigationEnd => event instanceof NavigationEnd)
       )
       .subscribe((event: NavigationEnd) => {
-        if (event.url === '/home') {
-          this.showButtons = true;
-        } else {
-          this.showButtons = true;
-        }
+        this.showButtons = event.url === '/home';
       });
   }
 
-  ngOnInit(): void{
-    this.data.fetchPets();
+  ngOnInit(): void {
+    this.petfinderApiService.getListOfPets();
     this.petService.petListChange.subscribe((pets: PetModel[]) => {
       this.animalsToShow = pets;
     });
@@ -54,20 +53,27 @@ export class HomeComponent implements OnInit{
   isFavorite(pet: PetModel): boolean {
     return this.petService.getFavorites().some(fav => fav.id === pet.id);
   }
-  // Function to display cats
-  // Function to filter and display cats
+
   showCats(): void {
-    this.animalsToShow = this.petService.getPets().filter(pet => pet.species === 'cat');
-    this.showButtons = false;
-  }
-  // Function to filter and display dogs
-  showDogs(): void {
-    this.animalsToShow = this.petService.getPets().filter(pet => pet.species === 'dog');
-    this.showButtons = false;
-  }
-    navigateToHome(): void {
-      this.showButtons = true; // Set showButtons to true when navigating to home
-      this.router.navigate(['/home']); // Navigate to the home page route
-    }
+    this.petfinderApiService.getListOfPetsByType('cat').subscribe((response: any) => {
+      this.animalsToShow = response.animals;
+      this.showButtons = false;
+    });
   }
 
+  showDogs(): void {
+    this.petfinderApiService.getListOfPetsByType('dog').subscribe((response: any) => {
+      this.animalsToShow = response.animals;
+      this.showButtons = false;
+    });
+  }
+
+  navigateToHome(): void {
+    this.showButtons = true;
+    this.router.navigate(['/home']);
+  }
+    // Method to limit the number of cards to 5
+    getLimitedAnimalsToShow(): any[] {
+      return this.animalsToShow.slice(0, 5);
+    }
+}

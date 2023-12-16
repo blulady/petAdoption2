@@ -17,7 +17,8 @@
 
 /* Styling for each pet card */
 .pet-card {
-  width: 200px;
+  width: 250px; /* Increase width */
+  height: 300px; /* Increase height */
   margin: 10px;
   border-radius: 15px;
   overflow: hidden;
@@ -30,21 +31,26 @@
   text-align: center;
   padding: 10px;
   position: relative;
+  cursor: pointer; /* Change mouse pointer to indicate clickability */
 }
 
 /* Styling for pet images */
 .pet-card img.pet-image {
   width: 100%;
-  height: 150px;
+  height: 200px; /* Adjust image height for the larger card */
   object-fit: cover;
   border-bottom-right-radius: 15px;
+
+  /* Updated box-shadow for the pet image */
+  box-shadow: 0 4px 8px rgba(2, 2, 2, 2.3); /* Modified shadow */
 }
 
+  
+
 /* Hover effect on pet card */
-.pet-card:hover {
+
+.pet-card img.pet-image:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease-in-out;
 }
 
 /* Styling for custom buttons */
@@ -96,7 +102,7 @@
   position: absolute;
   bottom: 5px;
   left: 10px;
-  font-size: 20px;
+  font-size: 22px;
   color: rgb(0, 0, 0);
   cursor: pointer;
   color: black; /* Default color of the delete button */
@@ -104,7 +110,9 @@
 }
 
 .remove-icon:hover {
+  transform: scale(1.1);
   color: red; /* Color to change to when hovered */
+
 }
 
 /* Background container styles */
@@ -195,8 +203,8 @@ button[type="submit"]:hover {
 /* Edit button styles */
 .edit-button {
   position: absolute;
-  top: 3px; /* Adjust as needed */
-  right: 145px; /* Adjust as needed */
+  top: 3px; /* Adjust top position */
+  right: 190px; /* Adjust left position */
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -222,6 +230,7 @@ button[type="submit"]:hover {
 .legend-item {
   margin: 0 10px; /* Add spacing between legend items */
 }
+
 /* New Pet Form */
 .new-pet-form {
   width: 100%;
@@ -248,4 +257,47 @@ button[type="submit"]:hover {
 .new-pet-form button[type="submit"] {
   width: 100%;
   max-width: 200px; /* Adjust max-width as needed */
+}
+/* Add hover effect for legend items */
+.legend-item:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  color: #007bff; /* Change color on hover */
+}
+
+/* Pet card enhancements */
+.pet-card {
+  /* Add a subtle box-shadow and increase the border radius */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.pet-card:hover {
+  /* Scale up and add shadow on hover */
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* New Pet Form animations */
+.new-pet-form {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.new-pet-form.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.pet-image {
+  width: 45%;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  cursor: pointer;
+}
+
+/* Optional: Add hover effect */
+.pet-image:hover {
+  transform: scale(1.05);
 }
