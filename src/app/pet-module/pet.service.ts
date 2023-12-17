@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FavoritePetModel, PetModel } from './petmodel';
 import { Subject } from 'rxjs';
+import { take, exhaustMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +26,7 @@ export class PetService {
     // new petModel('Twinkles', 'Is a large hairless cat', 'cat', 127, 5, 'https://justintadlock.com/user/media/2023/07/twinkle-cat-bed.webp' ),
   ]
 
-  constructor(private http: HttpClient) {} // Inject HttpClient here
+  constructor(private http: HttpClient, private authService: AuthService) {} // Inject HttpClient here
  //function to return petData array of pets
 
  getPets(): PetModel[] {
@@ -77,14 +79,15 @@ export class PetService {
     this.petFavListChange.next([...this.petFavorites]);
   }
 
-  private updateFavoritePetsOnServer(): void {
-    this.http.put(
-      'https://petadoption-9abd7-default-rtdb.firebaseio.com/favorites.json',
-      this.petFavorites
-    ).subscribe(response => {
+    private updateFavoritePetsOnServer(): void {
+    this.authService.user.pipe(take(1), exhaustMap( user => {
+      return this.http.put<FavoritePetModel[]>(
+      'https://petadoption-9abd7-default-rtdb.firebaseio.com/favorites.json?auth=' + user.token, this.petFavorites)}))
+      .subscribe(response => {
       console.log('Favorite pets updated on Firebase:', response);
     });
   }
+
 
   getFavorites(): FavoritePetModel[] {
     return this.petFavorites;
