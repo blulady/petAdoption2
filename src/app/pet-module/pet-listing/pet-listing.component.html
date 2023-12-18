@@ -51,7 +51,9 @@
   <div class="pet-grid">
     <!-- Pet card -->
     <ng-container *ngFor="let pet of petData; let i = index">
-      <div *ngIf="pet.photos && pet.photos.length > 0" class="pet-card" (click)="goToDetail(pet.id)">
+      <div *ngIf="pet.photos && pet.photos.length > 0" class="pet-card"
+        (click)="goToDetail(pet.id)"
+        [ngClass]="{ 'favorites-animation': isFavorite(pet) && toggleFavorite }">
         <div class="card-header">
           <!-- Heart icon for favorite -->
           <i class="fas fa-heart" [ngClass]="{ 'is-favorite': isFavorite(pet) }" (click)="toggleFavorite(pet); $event.stopPropagation();"></i>

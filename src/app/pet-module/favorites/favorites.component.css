@@ -22,34 +22,92 @@
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   width: 300px;
-  height: 400px; /* Adjusted height for more space */
+  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: box-shadow 0.3s ease-in-out;
+  animation: colorChange 12s infinite; /* Apply the animation */
 }
 
+
+/* Individual favorite photo */
 .favorite-photo {
-  width: 200px; /* Adjusted image width */
-  height: 200px; /* Adjusted image height */
+  width: 80%; /* Adjusted width to fill the container */
+  height: 80%; /* Adjusted height to maintain aspect ratio */
   object-fit: cover;
-  border-radius: 50%; /* Make images circular */
+  border-radius: 10px; /* Removed circular border-radius */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
   cursor: pointer; /* Show pointer cursor on hover */
 }
 
 .favorite-photo:hover {
-  transform: scale(1.1); /* Scale the image on hover */
+  transform: scale(1.05); /* Slightly scale the image on hover */
+  filter: brightness(0.8) contrast(1.2); /* Adjust brightness and contrast on hover */
 }
 /* Styles for the large heart */
 .large-heart-container {
   display: flex;
   justify-content: center;
   margin-bottom: 20px; /* Adjusted margin */
+  transition: transform 0.3s ease-in-out;
+
 }
 
 .large-heart-container img {
   width: 100px; /* Adjusted heart image size */
   height: auto;
+
   /* Add any other styles for the heart image */
 }
+.large-heart-container img:hover {
+  transform: scale(1.2); /* Scale the heart icon on hover */
+}
+
+/* CSS for the individual favorite item */
+.favorite-item {
+  position: relative;
+  /* Your existing styles */
+}
+
+/* CSS for the Remove from Favorites button */
+.remove-favorite-btn {
+  position: absolute;
+  bottom: 0px; /* Adjust the bottom position as needed */
+  left: 8%; /* Center the button horizontally */
+  transform: translateX(-50%); /* Adjust to center the button */
+  padding: 5px 10px;
+  background-color: #000000; /* Example background color */
+  color: #ffffff; /* Example text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  /* Additional styling for the button */
+}
+/* CSS */
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust this if needed */
+}
+
+.no-favorites {
+  text-align: center;
+}
+
+/* Add animation for background color change */
+@keyframes colorChange {
+  0% {
+    background-color: #ff000044; /* Initial color */
+  }
+  50% {
+    background-color: #ab11a5e2; /* Intermediate color */
+  }
+  100% {
+    background-color:  #ffffff /* Final color */
+  }
+}
+
+
