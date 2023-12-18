@@ -37,9 +37,8 @@
   object-fit: cover;
   border-radius: 10px; /* Removed circular border-radius */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
-  cursor: pointer; /* Show pointer cursor on hover */
   transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+  cursor: pointer; /* Show pointer cursor on hover */
 }
 
 .favorite-photo:hover {
