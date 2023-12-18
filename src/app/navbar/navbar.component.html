@@ -12,6 +12,9 @@
             aria-current="page">Home</a>
         </li>
         <li class="nav-item">
+          <a routerLink="/pet" routerLinkActive="active" class="nav-link">Pets</a>
+        </li>
+        <li class="nav-item">
           <a routerLink="/myfavorites" routerLinkActive="active" class="nav-link">My Favorites</a>
         </li>
         <li class="nav-item" *ngIf="!isAuthenticated">
@@ -23,7 +26,10 @@
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search for Pets" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-outline-success"
+          type="submit"
+          routerLink="/pet"
+          >Search</button>
       </form>
     </div>
   </div>

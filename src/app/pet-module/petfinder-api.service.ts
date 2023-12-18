@@ -33,29 +33,30 @@ export class PetfinderApiService {
         private petService: PetService
     ) {}
 
-    getOAuthToken() {
-        return this.http.post(this.petfinderOAuthURL, this.tokenRequestBody)
-        .pipe(
-            map(responseData => {
-                let tokenArray = [];
-                for (let val of Object.values(responseData)) {
-                    tokenArray.push(val);
-                }
-                this.token = tokenArray[2];
-                return this.token;
-            })
-        )
-        .subscribe();
-    }
+    // getOAuthToken() {
+    //     return this.http.post(this.petfinderOAuthURL, this.tokenRequestBody)
+    //     .pipe(
+    //         map(responseData => {
+    //             let tokenArray = [];
+    //             for (let val of Object.values(responseData)) {
+    //                 tokenArray.push(val);
+    //             }
+    //             this.token = tokenArray[2];
+    //             return this.token;
+    //         })
+    //     )
+    //     .subscribe();
+    // }
 
     getListOfPets(): void {
         this.http.post(this.petfinderOAuthURL, this.tokenRequestBody)
         .pipe(
             map(responseData => {
-                let tokenArray = [];
-                for (let val of Object.values(responseData)) {
-                    tokenArray.push(val);
-                }
+                // let tokenArray = [];
+                // for (let val of Object.values(responseData)) {
+                //     tokenArray.push(val);
+                // }
+                let tokenArray = Object.values(responseData);
                 this.token = tokenArray[2];
 
                 return this.token;
@@ -96,16 +97,18 @@ export class PetfinderApiService {
             // return foundPet;
         })
     }
+
     getListOfPetsByType(type: string) {
       return this.http.post(this.petfinderOAuthURL, this.tokenRequestBody).pipe(
         map((responseData) => {
-          let tokenArray = [];
-          for (let val of Object.values(responseData)) {
-            tokenArray.push(val);
-          }
-          this.token = tokenArray[2];
+            // let tokenArray = [];
+            // for (let val of Object.values(responseData)) {
+            //     tokenArray.push(val);
+            // }
+            let tokenArray = Object.values(responseData);
+            this.token = tokenArray[2];
 
-          return this.token;
+            return this.token;
         }),
         mergeMap((token) =>
           this.http.get(`${this.petfinderURL}?type=${type}`, {

@@ -38,12 +38,12 @@ export class PetListingComponent {
     this.router.navigate(['/pet', id]);
   }
 
-  getToken() {
-    return new Promise<void>((resolve, reject) => {
-      this.petfinderApiService.getOAuthToken();
-      resolve();
-    });
-  }
+  // getToken() {
+  //   return new Promise<void>((resolve, reject) => {
+  //     this.petfinderApiService.getOAuthToken();
+  //     resolve();
+  //   });
+  // }
 
   getPetList() {
     this.petfinderApiService.getListOfPets();
