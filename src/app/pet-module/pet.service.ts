@@ -60,7 +60,6 @@ export class PetService {
     this.petFavorites = [...favoritePets];
     this.petFavListChange.next([...this.petFavorites]);
   }
-  //function to edit a pet?
 
   addToFavorites(pet: PetModel): void {
     if (!this.petFavorites.some(fav => fav.id === pet.id)) {
