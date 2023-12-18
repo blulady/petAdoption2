@@ -33,10 +33,10 @@ export class PetService {
   return this.petData;
 }
   //function to create a new pet
-  addPet(pet: PetModel) {
-   this.petData.push(pet);
-   this.petListChange.next([...this.petData]); // Emit a new copy of the petData array
-}
+//   addPet(pet: PetModel) {
+//    this.petData.push(pet);
+//    this.petListChange.next([...this.petData]); // Emit a new copy of the petData array
+// }
  //function to delete a pet
  deletePet(pet: PetModel): void {
   const index = this.petData.findIndex(p => p.id === pet.id);
@@ -62,7 +62,6 @@ export class PetService {
     this.petFavorites = [...favoritePets];
     this.petFavListChange.next([...this.petFavorites]);
   }
-  //function to edit a pet?
 
   addToFavorites(pet: PetModel): void {
     if (!this.petFavorites.some(fav => fav.id === pet.id)) {

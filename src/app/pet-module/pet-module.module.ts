@@ -6,6 +6,7 @@ import { PetListingComponent } from './pet-listing/pet-listing.component';
 import { PetDetailsComponent } from './pet-details/pet-details.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     PetModuleRoutingModule,
     FormsModule
   ],

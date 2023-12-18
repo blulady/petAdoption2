@@ -21,13 +21,15 @@
         <!-- Display only if the animal has a photo -->
         <p class="pet-name">{{ animal.name | slice: 0:9 }}</p> <!-- Limiting name to 9 characters -->
         <p class="pet-species">Species: {{ animal.species }}</p>
+        <p class="pet-details">Details: {{ animal.description}}</p>
+
       </div>
       <!-- Display image only if the animal has a photo -->
       <img *ngIf="animal.photos && animal.photos.length > 0"
            [src]="animal.photos[0].large"
            alt="{{ animal.name }} Image"
            class="pet-image"
-           style="max-height: 150px; max-width: 150px;" />
+           style="max-height: 350px; max-width: 350px;" />
     </div>
   </div>
 </div>
@@ -56,7 +58,7 @@
           alt="{{ pet.name }} Image"
           class="pet-image" />
         <h3>{{ pet.species }}</h3>
-        
+
       </div>
     </div>
   </ng-container>

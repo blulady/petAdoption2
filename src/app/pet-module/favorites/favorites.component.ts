@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataStorageFirebase } from 'src/app/shared/data-storage-firebase.service';
-import { FavoritePetModel } from 'src/app/pet-module/petmodel';
+import { FavoritePetModel, PetModel } from 'src/app/pet-module/petmodel';
 import { PetService } from 'src/app/pet-module/pet.service';
 import { Router } from '@angular/router'; // Import Router
 
@@ -23,4 +23,11 @@ export class FavoritesComponent implements OnInit {
    goToDetail(id: number): void {
     this.router.navigate(['/pet', id]);
   }
+
+  removeFavorite(pet: PetModel): void {
+    this.petService.removeFromFavorites(pet);
+    // Update the list of favorites after removal
+    this.myFavorites = this.petService.getFavorites();
+  }
 }
+
