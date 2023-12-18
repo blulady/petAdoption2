@@ -15,6 +15,7 @@ export class PetListingComponent {
   showForm: boolean = false;
   newPet: Partial<PetModel> = {}; // Partial type for the new pet object
   formValid: boolean = true; // Flag to track form validation
+  addToFavorites = false; // Set this to true when addToFavorites is triggered
 
   constructor(
     private data: DataStorageFirebase,
