@@ -1,10 +1,21 @@
-<div class="details-container">
+<div *ngIf="isLoading" class="spinner">
+    <!-- <p>loading...</p> -->
+    <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div  *ngIf="pet" class="details-container">
     <div class="main-info-container">
 
         <div>
-            <div *ngIf="isLoading">
-                <!-- <p>loading...</p> -->
-                <app-loading-spinner></app-loading-spinner>
+
+            <div>
+                <h2>{{ pet.name }}</h2>
+                <p>{{ pet.breeds.primary }}</p>
+                <p>{{ pet.colors.primary }}</p>
+                <p>{{ pet.age }}</p>
+                <p>{{ pet.size }}</p>
+                <p>{{ pet.status }}</p>
+                <p>Contact: {{ pet.contact.email }}</p>
             </div>
             <h2>{{ pet.name }}</h2>
             <p>{{ pet.breeds.primary }}</p>
