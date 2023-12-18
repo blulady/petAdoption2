@@ -12,10 +12,11 @@ import { Router } from '@angular/router'; // Import Router
 export class FavoritesComponent implements OnInit {
   myFavorites: FavoritePetModel[] = [];
 
-  constructor(private petService: PetService, private router: Router, data: DataStorageFirebase) { }
+  constructor(private petService: PetService, private router: Router, private data: DataStorageFirebase) { }
 
   ngOnInit(): void {
     this.myFavorites = this.petService.getFavorites();
+    console.log(this.myFavorites)
   }
 
    // Navigate to detail view
