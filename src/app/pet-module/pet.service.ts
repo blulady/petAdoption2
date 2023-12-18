@@ -46,7 +46,10 @@ export class PetService {
     alert('Your pet has been successfully removed!');
   }
 }
-
+setOnePet(pet: PetModel) {
+  this.onePet = pet;
+  this.petSelected.next(pet);
+}
    // Function to set pets
    setPetList(petData: PetModel[]): void {
     this.petData = [...petData]; // Set the petData array with a new copy of the provided array
