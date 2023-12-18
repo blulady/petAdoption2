@@ -53,3 +53,24 @@
   height: auto;
   /* Add any other styles for the heart image */
 }
+
+/* CSS for the individual favorite item */
+.favorite-item {
+  position: relative;
+  /* Your existing styles */
+}
+
+/* CSS for the Remove from Favorites button */
+.remove-favorite-btn {
+  position: absolute;
+  bottom: 10px; /* Adjust the bottom position as needed */
+  left: 50%; /* Center the button horizontally */
+  transform: translateX(-50%); /* Adjust to center the button */
+  padding: 5px 10px;
+  background-color: #000000; /* Example background color */
+  color: #ffffff; /* Example text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  /* Additional styling for the button */
+}
