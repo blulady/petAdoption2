@@ -1,7 +1,8 @@
 .lds-roller {
     /* display: inline-block; */
     /* position: relative; */
-    margin-left: 15vw;
+    /* margin-left: 15vw; */
+    margin-top: 25px;
     width: 80px;
     height: 80px;
   }

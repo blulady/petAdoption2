@@ -21,6 +21,7 @@
   </button>
 </div>
 
+
 <!-- New Pet Form (initially hidden) -->
 <div *ngIf="showForm" class="new-pet-form">
   <form #newPetForm="ngForm" (ngSubmit)="onSubmit()">
@@ -44,9 +45,12 @@
 
 <!-- Background container -->
 <div class="background-container">
+  <div *ngIf="isLoading" class="spinner">
+    <!-- <p>loading...</p> -->
+    <app-loading-spinner></app-loading-spinner>
+  </div>
   <!-- Page title -->
   <div class="page-title">Available Pets</div>
-
   <!-- Pet cards grid -->
   <div class="pet-grid">
     <!-- Pet card -->
