@@ -53,10 +53,6 @@ export class PetService {
     this.petListChange.next([...this.petData]); // Emit a new copy of the petData array
   }
 
-  setOnePet(pet: PetModel) {
-    this.onePet = pet;
-    this.petSelected.next(pet);
-  }
   // Functions related to favorites below here
   setFavoritePets(favoritePets: FavoritePetModel[]): void {
     this.petFavorites = [...favoritePets];
