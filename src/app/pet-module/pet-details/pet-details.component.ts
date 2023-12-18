@@ -14,6 +14,8 @@ export class PetDetailsComponent implements OnInit {
   petId!: number;
   pet: any; // Interface for pet details
 
+  isLoading: boolean = true;
+
   constructor(
     private route: ActivatedRoute,
     private petService: PetService,
@@ -27,9 +29,12 @@ export class PetDetailsComponent implements OnInit {
       this.pet = this.petfinderApiService.getPetById(petIdfromParams);
       this.petService.petSelected.subscribe((pet: PetModel) => {
         this.pet = pet;
+        this.isLoading = false;
       })
       console.log(this.pet);
     });
+
+
   }
 }
 
