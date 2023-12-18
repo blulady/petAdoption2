@@ -52,12 +52,30 @@ export class PetListingComponent {
   isFavorite(pet: PetModel): boolean {
     return this.petService.getFavorites().some(fav => fav.id === pet.id);
   }
+// I LEFT IN IN CASE I HAVE TO REVERT BUGGING HOME PAGE??? below
+  // toggleFavorite(pet: PetModel): void {
+  //   if (this.isFavorite(pet)) {
+  //     this.petService.removeFromFavorites(pet);
+  //   } else {
+  //     this.petService.addToFavorites(pet);
+  //   }
+  // }
 
   toggleFavorite(pet: PetModel): void {
-    if (this.isFavorite(pet)) {
-      this.petService.removeFromFavorites(pet);
-    } else {
-      this.petService.addToFavorites(pet);
+    const index = this.petData.findIndex((item) => item.id === pet.id);
+    if (index !== -1) {
+      if (this.isFavorite(pet)) {
+        this.petService.removeFromFavorites(pet);
+      } else {
+        this.petService.addToFavorites(pet);
+      }
+
+      // Reorganize petData array putting all favorites at the front
+      this.petData.sort((a, b) => {
+        const aIsFavorite = this.isFavorite(a) ? -1 : 1;
+        const bIsFavorite = this.isFavorite(b) ? -1 : 1;
+        return aIsFavorite - bIsFavorite;
+      });
     }
   }
 
