@@ -45,7 +45,7 @@
   box-shadow: 0 4px 8px rgba(2, 2, 2, 2.3); /* Modified shadow */
 }
 
-  
+
 
 /* Hover effect on pet card */
 
@@ -278,17 +278,9 @@ button[type="submit"]:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* New Pet Form animations */
-.new-pet-form {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
 
-.new-pet-form.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+
+
 .pet-image {
   width: 45%;
   border-radius: 8px;
