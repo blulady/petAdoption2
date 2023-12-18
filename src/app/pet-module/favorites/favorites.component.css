@@ -26,32 +26,41 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
+
+/* Individual favorite photo */
 .favorite-photo {
-  width: 200px; /* Adjusted image width */
-  height: 200px; /* Adjusted image height */
+  width: 100%; /* Adjusted width to fill the container */
+  height: 100%; /* Adjusted height to maintain aspect ratio */
   object-fit: cover;
-  border-radius: 50%; /* Make images circular */
+  border-radius: 10px; /* Removed circular border-radius */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
   cursor: pointer; /* Show pointer cursor on hover */
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 
 .favorite-photo:hover {
-  transform: scale(1.1); /* Scale the image on hover */
+  transform: scale(1.05); /* Slightly scale the image on hover */
+  filter: brightness(0.8) contrast(1.2); /* Adjust brightness and contrast on hover */
 }
 /* Styles for the large heart */
 .large-heart-container {
   display: flex;
   justify-content: center;
   margin-bottom: 20px; /* Adjusted margin */
+  transition: transform 0.3s ease-in-out;
 }
 
 .large-heart-container img {
   width: 100px; /* Adjusted heart image size */
   height: auto;
   /* Add any other styles for the heart image */
+}
+.large-heart-container img:hover {
+  transform: scale(1.2); /* Scale the heart icon on hover */
 }
 
 /* CSS for the individual favorite item */
@@ -73,4 +82,15 @@
   border-radius: 5px;
   cursor: pointer;
   /* Additional styling for the button */
+}
+/* CSS */
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust this if needed */
+}
+
+.no-favorites {
+  text-align: center;
 }
