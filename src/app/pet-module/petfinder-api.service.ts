@@ -75,10 +75,11 @@ export class PetfinderApiService {
         this.http.post(this.petfinderOAuthURL, this.tokenRequestBody)
         .pipe(
             map(responseData => {
-                let tokenArray = [];
-                for (let val of Object.values(responseData)) {
-                    tokenArray.push(val);
-                }
+                // let tokenArray = [];
+                // for (let val of Object.values(responseData)) {
+                //     tokenArray.push(val);
+                // }
+                let tokenArray = Object.values(responseData);
                 this.token = tokenArray[2];
 
                 return this.token;

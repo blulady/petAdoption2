@@ -17,6 +17,8 @@ export class PetListingComponent {
   formValid: boolean = true; // Flag to track form validation
   addToFavorites = false; // Set this to true when addToFavorites is triggered
 
+  isLoading = true;
+
   constructor(
     private data: DataStorageFirebase,
     private petService: PetService,
@@ -28,6 +30,7 @@ export class PetListingComponent {
     this.getPetList();
     this.petService.petListChange.subscribe((pets: PetModel[]) => {
       this.petData = pets;
+      this.isLoading = false;
     });
   }
 

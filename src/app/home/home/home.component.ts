@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   animalsToShow: any[] = [];
   showButtons: boolean = true;
 
+  isLoading = true;
+
   constructor(
     private data: DataStorageFirebase,
     private petService: PetService,
@@ -34,6 +36,7 @@ export class HomeComponent implements OnInit {
     this.petfinderApiService.getListOfPets();
     this.petService.petListChange.subscribe((pets: PetModel[]) => {
       this.animalsToShow = pets;
+      this.isLoading = false;
     });
   }
 

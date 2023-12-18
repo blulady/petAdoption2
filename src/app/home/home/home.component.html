@@ -41,7 +41,12 @@
 <h1 class="page-title"></h1>
 
 <div class="pet-grid">
+  <div *ngIf="isLoading">
+    <!-- <p>loading...</p> -->
+    <app-loading-spinner></app-loading-spinner>
+  </div>
   <ng-container *ngFor="let pet of getLimitedAnimalsToShow()">
+    
     <div *ngIf="pet.photos && pet.photos.length > 0" class="pet-card" (click)="goToDetail(pet.id)">
       <div class="card-header">
         <i class="fas fa-heart"
