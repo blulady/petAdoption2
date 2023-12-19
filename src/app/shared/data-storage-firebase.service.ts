@@ -27,8 +27,9 @@ fetchPets(){
   this.http.get<PetModel[]>(
     'https://petadoption-9abd7-default-rtdb.firebaseio.com/pets.json'
   ).subscribe(petList => {
-    this.petService.setPetList(petList);
+    this.petService.setPetList(Object.values(petList));
   })
+  console.log(this.petService.petData);
 }
   fetchFavPets() {
     this.http.get<FavoritePetModel[]>(
