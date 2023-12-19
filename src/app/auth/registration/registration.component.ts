@@ -21,6 +21,8 @@ export class RegistrationComponent {
     }
     const email = form.value.email;
     const password = form.value.password;
+    const confirmPassword = form.value.confirmPassword;
+
     let authObs: Observable<AuthResponseData>;
     authObs = this.authService.signup2(email, password)
 
