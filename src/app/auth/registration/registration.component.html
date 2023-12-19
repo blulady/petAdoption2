@@ -4,16 +4,30 @@
       <div class="alert alert-danger" *ngIf="error">
         <p> {{ error }} </p>
       </div>
-      <form #authform="ngForm" (ngSubmit)="onSubmit(authform)">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" class="form-control" ngModel name="email" required email>
+          <input type="email" id="email" class="form-control" formControlName="email" name="email" required email>
+          <span class="text-danger" *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+            Please enter your email.
+          </span>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6">
+          <input type="password" id="password" class="form-control" formControlName="password" name="password" required minlength="6">
+          <span class="text-danger" *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
+            <p>Please enter your password.</p>
+          </span>
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" name="confirmPassword" required minlength="6">
+          <span class="text-danger" *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched">
+            Please confirm your password
+          </span>
+          <div class="text-danger" *ngIf="registerForm.get('password').valid && registerForm .get('confirmPassword').dirty && (registerForm.get('password').value !== registerForm.get('confirmPassword').value)">
+            <p>Passwords Should Match</p>
+          </div>
           <div>
-            <button class="btn btn-primary" type="submit" [disabled]="!authform.valid" (click)="onSubmit">Sign Up</button>
+            <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid || !(registerForm.get('password').value === registerForm.get('confirmPassword').value)" (click)="onSubmit">Sign Up</button>
           </div>
         </div>
       </form>

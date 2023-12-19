@@ -3,13 +3,15 @@ import { Injectable } from "@angular/core";
 import { PetService } from "../pet-module/pet.service";
 import { PetModel, FavoritePetModel } from '../pet-module/petmodel';
 import { Observable } from "rxjs";
+import { take, exhaustMap } from "rxjs/operators";
+import { AuthService } from "../auth/auth.service";
 
 
 @Injectable({providedIn: 'root'})
 export class DataStorageFirebase {
   private firebaseUrl = 'https://petadoption-9abd7-default-rtdb.firebaseio.com';
-  constructor(private http: HttpClient, private petService: PetService){}
-// artifact function to store pets in firebase if you manually add in service.
+  constructor(private http: HttpClient, private petService: PetService, private authService: AuthService){}
+
 // storePets() {
 //   const petList = this.petService.getPets();
 //   this.http.put(
@@ -32,15 +34,89 @@ fetchPets(){
   })
   console.log(this.petService.petData);
 }
-//fetches fav pets from firebase specicially populates favoritepetmodel[array]
-  fetchFavPets() {
-    this.http.get<FavoritePetModel[]>(
-      'https://petadoption-9abd7-default-rtdb.firebaseio.com/favorites.json'
-    ).subscribe(favPetList => {
-      this.petService.setFavoritePets(favPetList);
-    });
+fetchFavPets() {
+  this.http.get<FavoritePetModel[]>(
+    'https://petadoption-9abd7-default-rtdb.firebaseio.com/favorites.json'
+  ).subscribe(favPetList => {
+    this.petService.setFavoritePets(favPetList);
+  });
 }
-//updates pet to firebase
+// fetchFavPets() {
+//   this.authService.user.pipe(take(1), exhaustMap( user => {
+//     return this.http.get<FavoritePetModel[]>(
+//       'https://petadoption-9abd7-default-rtdb.firebaseio.com/favorites.json?auth=' + user.token)},
+    // )).subscribe(favPetList => {
+    // this.petService.setFavoritePets(favPetList);
+    // console.log(favPetList);
+
+//   });
+// }
+  // fetchFavPets() {
+  //   return this.authService.user.pipe(
+  //     take(1),
+  //     exhaustMap((user) => {
+  //       if (!user) {
+  //         throw new Error('User not authenticated');
+  //       }
+  //       return this.http.get<FavoritePetModel[]>(
+  //         'https://petadoption-9abd7-default-rtdb.firebaseio.com/favorites.json?auth=' +
+  //           user.token
+  //       );
+  //     })
+  //   ).subscribe(
+  //     (favPetList) => {
+  //       this.petService.setFavoritePets(favPetList);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //       // Handle error
+  //     }
+  //   );
+  // }
+// does have user
+//   fetchFavPets() {
+//     return this.authService.user.pipe(
+//       take(1),
+//       exhaustMap((user) => {
+//         if (!user) {
+//           throw new Error('User not authenticated');
+//         }
+//         return this.http.get<FavoritePetModel[]>(
+//           'https://petadoption-9abd7-default-rtdb.firebaseio.com/favorites.json?auth=' +
+//             user.token
+//         );
+//       })
+//     ).subscribe(response => {
+//       this.petService.setFavoritePets(response);
+//       console.log(response);},
+//       (error) => {
+//         console.log(error);
+//         // Handle error
+//       }
+//     );
+//   }
+//   fetchFavPets() {
+//   return this.authService.user.pipe(take(1), exhaustMap( user => {
+//     const authToken = user.token;
+//     return this.http.get<FavoritePetModel[]>(
+//       'https://petadoption-9abd7-default-rtdb.firebaseio.com/favorites.json?auth=' + authToken
+//     );
+//   })).subscribe(favPetList => {
+//     this.petService.setFavoritePets(favPetList);
+//   });
+// }
+// fetchFavPets() {
+//   return this.authService.user.pipe(take(1), exhaustMap( user => {
+//     const authToken = user.token;
+//     return this.http.get<FavoritePetModel[]>(
+//       'https://petadoption-9abd7-default-rtdb.firebaseio.com/favorites.json?auth=' + authToken
+//     );
+//   })).subscribe(response => {
+//     this.petService.setFavoritePets(response);
+//   });
+// }
+
+
 updatePet(updatedPet: PetModel): Observable<any> {
   const url = `${this.firebaseUrl}/pets/${updatedPet.id}.json`; // Endpoint URL for updating a specific pet
   return this.http.put(url, updatedPet);
