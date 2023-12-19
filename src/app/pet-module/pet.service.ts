@@ -18,7 +18,7 @@ export class PetService {
   onePet: PetModel;
 
   public petData: PetModel[] = [
-    //now is populating below information via firebase api
+    //now is populating below information via firebase api and petfinder api
     // new petModel('Spot', 'Is a good boy', 'dog', 123, 1, 'https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_700,h_467/https://puppyintraining.com/wp-content/uploads/Black-and-White-Dog-Names-700x467.jpg' ),
     // new petModel('Rufus', 'Is a bad boy', 'dog', 124, 2, 'https://www.rocketdogrescue.org/wp-content/uploads/2018/06/IMG_9025-1.jpg' ),
     // new petModel('Tabby', 'A crazy feline', 'cat', 125, 3, 'https://i.pinimg.com/736x/b0/3c/be/b03cbeaded6326b85d1edb86c91caa59.jpg' ),
@@ -27,16 +27,11 @@ export class PetService {
   ]
 
   constructor(private http: HttpClient, private authService: AuthService) {} // Inject HttpClient here
- //function to return petData array of pets
 
- getPets(): PetModel[] {
+  //function to return petData array of pets
+  getPets(): PetModel[] {
   return this.petData;
 }
-  //function to create a new pet
-//   addPet(pet: PetModel) {
-//    this.petData.push(pet);
-//    this.petListChange.next([...this.petData]); // Emit a new copy of the petData array
-// }
  //function to delete a pet
  deletePet(pet: PetModel): void {
   const index = this.petData.findIndex(p => p.id === pet.id);
@@ -46,22 +41,23 @@ export class PetService {
     alert('Your pet has been successfully removed!');
   }
 }
+//function to set one pet
 setOnePet(pet: PetModel) {
   this.onePet = pet;
   this.petSelected.next(pet);
 }
-   // Function to set pets
+   // Function to set multiple pets
    setPetList(petData: PetModel[]): void {
     this.petData = [...petData]; // Set the petData array with a new copy of the provided array
     this.petListChange.next([...this.petData]); // Emit a new copy of the petData array
   }
 
-  // Functions related to favorites below here
+ // sets favorite pets array
   setFavoritePets(favoritePets: FavoritePetModel[]): void {
     this.petFavorites = [...favoritePets];
     this.petFavListChange.next([...this.petFavorites]);
   }
-
+// adds a new favorite pet to array and firebase
   addToFavorites(pet: PetModel): void {
     if (!this.petFavorites.some(fav => fav.id === pet.id)) {
       const favoritePet: FavoritePetModel = { ...pet, favoriteDate: new Date() };
@@ -70,13 +66,13 @@ setOnePet(pet: PetModel) {
       this.petFavListChange.next([...this.petFavorites]);
     }
   }
-
+  //removes a pet from array and firebase
   removeFromFavorites(pet: PetModel): void {
     this.petFavorites = this.petFavorites.filter(fav => fav.id !== pet.id);
     this.updateFavoritePetsOnServer(); // Update Firebase on removing a favorite
     this.petFavListChange.next([...this.petFavorites]);
   }
-
+//updates favorite pets array on firebase
     private updateFavoritePetsOnServer(): void {
     this.authService.user.pipe(take(1), exhaustMap( user => {
       return this.http.put<FavoritePetModel[]>(
@@ -86,7 +82,7 @@ setOnePet(pet: PetModel) {
     });
   }
 
-
+  // function to return favorite pets array of pets
   getFavorites(): FavoritePetModel[] {
     return this.petFavorites;
   }
