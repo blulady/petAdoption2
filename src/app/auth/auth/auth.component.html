@@ -8,14 +8,14 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" class="form-control" ngModel name="email" required email>
-          <div class="alert alert-danger" *ngIf="authform.controls['email'].invalid && authform.controls['email'].touched">
+          <div class="text-danger" *ngIf="authform.controls['email'].invalid && authform.controls['email'].touched">
             <p>Please enter your email.</p>
           </div>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6">
-          <div class="alert alert-danger" *ngIf="authform.controls['password'].invalid && authform.controls['password'].touched">
+          <div class="text-danger" *ngIf="authform.controls['password'].invalid && authform.controls['password'].touched">
             <p>Please enter your password.</p>
           </div>
           <div>
