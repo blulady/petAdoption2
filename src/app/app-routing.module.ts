@@ -5,6 +5,7 @@ import { PetModuleModule } from './pet-module/pet-module.module';
 import { AuthModule } from './auth/auth.module';
 import { PetDetailsComponent } from './pet-module/pet-details/pet-details.component';
 import { FavoritesComponent } from './pet-module/favorites/favorites.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {path: 'home',
@@ -20,7 +21,7 @@ const routes: Routes = [
     m => m.AuthModule
   )},
   { path: 'pet/:id', component: PetDetailsComponent }, //added to path to pet/ :id -garrett
-  { path: 'myfavorites', component: FavoritesComponent }
+  { path: 'myfavorites', component: FavoritesComponent, canActivate: [AuthGuard] }, //added to path to myfavorites -garrett
 ];
 
 @NgModule({
