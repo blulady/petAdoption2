@@ -14,7 +14,7 @@ export class PetDetailsComponent implements OnInit {
   petId!: number;
   pet: any; // Interface for pet details
 
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,

@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home/home.component';
 import { HomeModule } from './home/home.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TokenInterceptorService } from './pet-module/token-interceptor.service'
 
 
 
@@ -30,7 +31,13 @@ import { FormsModule } from '@angular/forms';
     // PetModuleModule,
     // HomeModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

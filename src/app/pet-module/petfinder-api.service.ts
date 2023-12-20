@@ -33,88 +33,40 @@ export class PetfinderApiService {
         private petService: PetService
     ) {}
 
-    // getOAuthToken() {
-    //     return this.http.post(this.petfinderOAuthURL, this.tokenRequestBody)
-    //     .pipe(
-    //         map(responseData => {
-    //             let tokenArray = [];
-    //             for (let val of Object.values(responseData)) {
-    //                 tokenArray.push(val);
-    //             }
-    //             this.token = tokenArray[2];
-    //             return this.token;
-    //         })
-    //     )
-    //     .subscribe();
-    // }
-
-    getListOfPets(): void {
-        this.http.post(this.petfinderOAuthURL, this.tokenRequestBody)
+    getOAuthToken() {
+        return this.http.post(this.petfinderOAuthURL, this.tokenRequestBody)
         .pipe(
             map(responseData => {
-                // let tokenArray = [];
-                // for (let val of Object.values(responseData)) {
-                //     tokenArray.push(val);
-                // }
-                let tokenArray = Object.values(responseData);
+                let tokenArray = [];
+                for (let val of Object.values(responseData)) {
+                    tokenArray.push(val);
+                }
                 this.token = tokenArray[2];
-
                 return this.token;
-            }),
-            mergeMap(token => this.http.get(this.petfinderURL,
-                {headers: new HttpHeaders({ Authorization: `Bearer ${token}`})}
-                )
-            )
-        ).subscribe((resData:any) => {
-            this.petService.setPetList(resData.animals);
-            // this.petService.petListChange.next(this.petService.petData);
+            })
+        )
+        // .subscribe();
+    }
 
+    getListOfPets(): void {
+        this.http.get(this.petfinderURL)
+        .subscribe((resData:any) => {
+            this.petService.setPetList(resData.animals);
+            console.log(this.petService.petData);
         })
     }
 
     getPetById(id: number) {
-        this.http.post(this.petfinderOAuthURL, this.tokenRequestBody)
-        .pipe(
-            map(responseData => {
-                // let tokenArray = [];
-                // for (let val of Object.values(responseData)) {
-                //     tokenArray.push(val);
-                // }
-                let tokenArray = Object.values(responseData);
-                this.token = tokenArray[2];
+        this.http.get(`${this.petfinderURL}${id}`)
+            .subscribe((resData:any) => {
+                const foundPet = resData.animal;
+                console.log(foundPet)
+                return foundPet;
+            })
+        }
 
-                return this.token;
-            }),
-            mergeMap(token => this.http.get(`${this.petfinderURL}${id}`,
-                {headers: new HttpHeaders({ Authorization: `Bearer ${token}`})}
-                )
-            )
-        ).subscribe((resData:any) => {
-            // this.singlePet = resData.animal;
-            // console.log(this.singlePet);
-            const foundPet = resData.animal;
-            this.petService.setOnePet(foundPet);
-            // return foundPet;
-        })
-    }
 
     getListOfPetsByType(type: string) {
-      return this.http.post(this.petfinderOAuthURL, this.tokenRequestBody).pipe(
-        map((responseData) => {
-            // let tokenArray = [];
-            // for (let val of Object.values(responseData)) {
-            //     tokenArray.push(val);
-            // }
-            let tokenArray = Object.values(responseData);
-            this.token = tokenArray[2];
-
-            return this.token;
-        }),
-        mergeMap((token) =>
-          this.http.get(`${this.petfinderURL}?type=${type}`, {
-            headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
-          })
-        )
-      );
+        return this.http.get(`${this.petfinderURL}?type=${type}`)
     }
 }
