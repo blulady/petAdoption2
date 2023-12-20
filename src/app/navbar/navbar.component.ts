@@ -23,15 +23,15 @@ export class NavbarComponent  implements OnInit, OnDestroy {
 
   ngOnInit(): void {
      // Fetch favorites when the component initializes
+     //Nolan said "I would have it exist in the favorites component. You can preload that component in the module"
      this.data.fetchFavPets();
 
      this.userSub = this.authService.user.subscribe( user => {
       this.isAuthenticated = !!user;
      });
   }
-  toggleFavorites(): void {
-    this.showFavorites = !this.showFavorites;
-  }
+
+  //multi step bug fixed but from when cat/dog buttons are clicked home page wouldn't display right
   reloadHomePage(): void {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/home']);

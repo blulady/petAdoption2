@@ -14,7 +14,7 @@
         <li class="nav-item">
           <a routerLink="/pet" routerLinkActive="active" class="nav-link">Pets</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAuthenticated">
           <a routerLink="/myfavorites" routerLinkActive="active" class="nav-link">My Favorites</a>
         </li>
         <li class="nav-item" *ngIf="!isAuthenticated">

@@ -299,7 +299,7 @@ button[type="submit"]:hover {
 }
 /* Apply colorChange animation to pet cards when addToFavorites and toggleFavorite are true */
 .favorites-animation {
-  animation: colorChange 10s infinite;
+  animation: colorChange 20s infinite;
 }
 @keyframes colorChange {
   0% {

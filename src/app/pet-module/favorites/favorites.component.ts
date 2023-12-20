@@ -10,20 +10,21 @@ import { Router } from '@angular/router'; // Import Router
   styleUrls: ['./favorites.component.css']
 })
 export class FavoritesComponent implements OnInit {
+  //array for myfavorites to exist outside of firebase
   myFavorites: FavoritePetModel[] = [];
 
   constructor(private petService: PetService, private router: Router, private data: DataStorageFirebase) { }
 
   ngOnInit(): void {
+    //grabs myfavorites from firebase
     this.myFavorites = this.petService.getFavorites();
-    console.log(this.myFavorites)
   }
 
-   // Navigate to detail view
+   // Navigate to detailed view by pet ID
    goToDetail(id: number): void {
     this.router.navigate(['/pet', id]);
   }
-
+  //removefavorite works with toggle functionality also removes from firebase
   removeFavorite(pet: PetModel): void {
     this.petService.removeFromFavorites(pet);
     // Update the list of favorites after removal

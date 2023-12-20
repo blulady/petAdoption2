@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./pet-listing.component.css']
 })
 export class PetListingComponent {
-  petData: PetModel[] = [];
-  showForm: boolean = false;
+  petData: PetModel[] = []; // Array of PetModel objects
+  showForm: boolean = false; // Flag to show/hide the form
   newPet: Partial<PetModel> = {}; // Partial type for the new pet object
   formValid: boolean = true; // Flag to track form validation
   addToFavorites = false; // Set this to true when addToFavorites is triggered
@@ -27,14 +27,14 @@ export class PetListingComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getPetList();
-    this.petService.petListChange.subscribe((pets: PetModel[]) => {
+    this.getPetList(); // Get the list of pets
+    this.petService.petListChange.subscribe((pets: PetModel[]) => { // Update the list of pets
       this.petData = pets;
       this.isLoading = false;
     });
   }
 
-  goToDetail(id: number) {
+  goToDetail(id: number) { // Navigate to the detailed view of a pet
     this.router.navigate(['/pet', id]);
   }
 
@@ -45,25 +45,17 @@ export class PetListingComponent {
   //   });
   // }
 
-  getPetList() {
+  getPetList() { // Get the list of pets
     this.petfinderApiService.getListOfPets();
     this.petService.setPetList(this.petfinderApiService.petList);
     this.petService.petListChange.next(this.petService.petData.slice());
     console.log(this.petService.petData.slice());
   }
-
+// Add a new pet to the fav list of pets
   isFavorite(pet: PetModel): boolean {
     return this.petService.getFavorites().some(fav => fav.id === pet.id);
   }
-// I LEFT IN IN CASE I HAVE TO REVERT BUGGING HOME PAGE??? below
-  // toggleFavorite(pet: PetModel): void {
-  //   if (this.isFavorite(pet)) {
-  //     this.petService.removeFromFavorites(pet);
-  //   } else {
-  //     this.petService.addToFavorites(pet);
-  //   }
-  // }
-
+//toggle heart to favorite or unfavorite a pet
   toggleFavorite(pet: PetModel): void {
     const index = this.petData.findIndex((item) => item.id === pet.id);
     if (index !== -1) {
@@ -81,25 +73,25 @@ export class PetListingComponent {
       });
     }
   }
-
+//delete a pet and bug fix to stop navigation to detail view via stopPropagation.
   deletePet(pet: PetModel): void {
     event.stopPropagation();
     if (confirm('Are you sure you want to remove this listing, and not see it again?')) {
       this.petService.deletePet(pet);
     }
   }
-
+  // show form to edit/add a new pet
   showAddPetForm(): void {
     this.showForm = !this.showForm; // Toggle form visibility
     if (!this.showForm) {
       this.clearForm(); // Clear form fields if form is hidden
     }
   }
-
+// gives pets unique # when created
   generateUniqueId(): number {
     return Math.floor(Math.random() * 10000); // Replace this with your unique ID generation logic
   }
-
+// Add a new pet to the list of pets and update the list of pets
   onSubmit(): void {
     this.checkFormValidity(); // Check form validity before submission
     if (this.formValid) {
@@ -121,18 +113,18 @@ export class PetListingComponent {
       alert('Please fill out all fields.');
     }
   }
-
+  // make sure form is filled out before submission
   checkFormValidity(): void {
     this.formValid = true;
     if (!this.newPet.name || !this.newPet.species || !this.newPet.description || !this.newPet.photo) {
       this.formValid = false;
     }
   }
-
+// clear form fields
   clearForm(): void {
     this.newPet = {};
   }
-
+// edit a pet to firebase
   editPet(petId: number): void {
     event.stopPropagation();
     const selectedPet = this.petData.find(pet => pet.id === petId);
