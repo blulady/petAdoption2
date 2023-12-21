@@ -14,7 +14,7 @@ export class PetDetailsComponent implements OnInit {
   petId!: number;
   pet: any; // Interface for pet details
 
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,8 +27,10 @@ export class PetDetailsComponent implements OnInit {
       // Fetch the detailed information of the pet using this.petId
       // Assign the retrieved data to this.pet
       this.pet = this.petfinderApiService.getPetById(petIdfromParams);
+      
       this.petService.petSelected.subscribe((pet: PetModel) => {
         this.pet = pet;
+        console.log(pet);
         this.isLoading = false;
       })
       console.log(this.pet);
