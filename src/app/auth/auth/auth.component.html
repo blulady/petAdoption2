@@ -7,15 +7,15 @@
       <form #authform="ngForm" (ngSubmit)="onSubmit(authform)">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" class="form-control" ngModel name="email" required email>
-          <div class="text-danger" *ngIf="authform.controls['email'].invalid && authform.controls['email'].touched">
+          <input type="email" id="email" class="form-control" ngModel name="email" required email #email="ngModel">
+          <div class="text-danger" *ngIf="!email.valid && email.touched">
             <p>Please enter your email.</p>
           </div>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6">
-          <div class="text-danger" *ngIf="authform.controls['password'].invalid && authform.controls['password'].touched">
+          <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6" #password="ngModel">
+          <div class="text-danger" *ngIf="password.invalid && password.touched">
             <p>Please enter your password.</p>
           </div>
           <div>
