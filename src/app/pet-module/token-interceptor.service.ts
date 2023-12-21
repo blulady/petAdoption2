@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable, exhaustMap, map, mergeMap } from 'rxjs';
-
+import { Observable, exhaustMap, map } from 'rxjs';
 
 import { PetfinderApiService } from './petfinder-api.service';
 
-
 @Injectable()
-
 
 export class TokenInterceptorService implements HttpInterceptor {
    

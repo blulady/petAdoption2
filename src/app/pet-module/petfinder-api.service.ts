@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { map, mergeMap, partition } from 'rxjs';
+import { map } from 'rxjs';
 import { PetModel } from './petmodel';
 import { PetService } from './pet.service';
 
@@ -65,7 +65,6 @@ export class PetfinderApiService {
                 // return foundPet;
             })
         }
-
 
     getListOfPetsByType(type: string) {
         return this.http.get(`${this.petfinderURL}?type=${type}`)
