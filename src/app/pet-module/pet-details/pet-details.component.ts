@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map, exhaustMap } from 'rxjs';
 
 import { PetModel } from '../petmodel';
 import { PetService } from '../pet.service';
@@ -22,18 +23,22 @@ export class PetDetailsComponent implements OnInit {
     private petfinderApiService: PetfinderApiService) {}
 
   ngOnInit() {
+
+
     this.route.params.subscribe(params => {
       const petIdfromParams = +params['id']; // Extract the pet ID from the route parameter
       // Fetch the detailed information of the pet using this.petId
       // Assign the retrieved data to this.pet
       this.pet = this.petfinderApiService.getPetById(petIdfromParams);
-      
+      console.log(this.pet);
       this.petService.petSelected.subscribe((pet: PetModel) => {
         this.pet = pet;
         console.log(pet);
         this.isLoading = false;
       })
-      console.log(this.pet);
+      // this.petService.setOnePet(this.pet);
+      // console.log(this.pet);
+      // this.isLoading = false;
     });
 
 

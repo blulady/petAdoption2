@@ -59,9 +59,10 @@ export class PetfinderApiService {
     getPetById(id: number) {
         this.http.get(`${this.petfinderURL}${id}`)
             .subscribe((resData:any) => {
-                const foundPet = resData.animal;
-                console.log(foundPet)
-                return foundPet;
+                this.petService.setOnePet(resData.animal);
+                // const foundPet = resData.animal;
+                // console.log(foundPet)
+                // return foundPet;
             })
         }
 
