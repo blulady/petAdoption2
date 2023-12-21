@@ -45,6 +45,7 @@ export class PetService {
 setOnePet(pet: PetModel) {
   this.onePet = pet;
   this.petSelected.next(pet);
+  console.log(pet);
 }
    // Function to set multiple pets
    setPetList(petData: PetModel[]): void {
