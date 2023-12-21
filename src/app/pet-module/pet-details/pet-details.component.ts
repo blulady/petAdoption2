@@ -27,13 +27,14 @@ export class PetDetailsComponent implements OnInit {
       // Fetch the detailed information of the pet using this.petId
       // Assign the retrieved data to this.pet
       this.pet = this.petfinderApiService.getPetById(petIdfromParams);
-      console.log(this.pet);
       this.petService.petSelected.subscribe((pet: PetModel) => {
         this.pet = pet;
-        console.log(pet);
         this.isLoading = false;
       })
+      console.log(this.pet);
     });
+
+
   }
 }
 
